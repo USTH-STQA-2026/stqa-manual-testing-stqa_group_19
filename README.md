@@ -22,7 +22,7 @@ Hệ thống cần kiểm thử: **Quản lý mượn sách Thư viện ABC** �
 
 | # | MSSV | Họ và tên | Vai trò |
 |---|------|-----------|---------|
-| 1 | | | Nhóm trưởng |
+| 1 |23BA14076 |Nguyễn Tùng Dương | Nhóm trưởng |
 | 2 | | | Thành viên |
 | 3 |23BA14075 | Phạm Đình Ánh Dương | Thành viên |
 | 4 |23BA14056 | Nguyễn Minh Đức | Thành viên |
