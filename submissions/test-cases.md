@@ -71,9 +71,9 @@
 
 | Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
 |-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-|TC-01|Trả sách đang mượn, còn hạn, thành công, không cảnh bảo|Đã đăng nhập bằng ba.nguyen@email.com. Vừa mượn BOOK001(Lập Trình Flutter cơ bản). Sách trong trạng thái "Đang mượn"|1.Vào tab "Mượn/Trả". 2.Tìm BOOK001 trong "Phiếu mượn của tôi". 3. Nhấn nút "Trả sách" của phiếu đó. Xác nhận trả (nếu có) |Phiếu mượn: BOOK001, ngày mượn = hôm nay, ngày hết hạn = hôm nay + 14 ngày(còn hạn)|1.Thông báo trả sách thành công. 2.Phiếu mượn cập nhật thành "Đã trả". 3.Vào tab "Sách" cập nhật thành trạng thái "Có sẵn". 4.Không có cảnh báo quá hạn|REQ -05|EP|
+|TC-01|Return a borrowed book on time, no overdue warning| Logged in ba.nguyen@email.com. Just borrowed BOOK001.|1.Go to tab "Borrow/Return". 2.Find BOOK001 in "My borrow records". 3. Click "Return book". Comfirm if prompted |BOOK001, borrow date = today, due date = today + 14 days|1.Success message show. 2.Record status "Returned" 3.BOOK001 status -> "Available". 4.No overdue warning|REQ -05|EP|
+|TC-02 |Return an overdue book- allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is diplayed 3. BR001 status -> "Returned" . 4. BOOK003 status -> "Available" |REQ -05 |EP, BVA |
 | | | | | | | | |
-
 ---
 
 ## Tổng hợp
