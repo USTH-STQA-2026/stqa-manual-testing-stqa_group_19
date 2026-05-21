@@ -70,6 +70,7 @@
 <!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
 
 | Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
+|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
 |TC-01|Trả sách đang mượn, còn hạn, thành công, không cảnh bảo|Đã đăng nhập bằng ba.nguyen@email.com. Vừa mượn BOOK001(Lập Trình Flutter cơ bản). Sách trong trạng thái "Đang mượn"|1.Vào tab "Mượn/Trả". 2.Tìm BOOK001 trong "Phiếu mượn của tôi". 3. Nhấn nút "Trả sách" của phiếu đó. Xác nhận trả (nếu có) |Phiếu mượn: BOOK001, ngày mượn = hôm nay, ngày hết hạn = hôm nay + 14 ngày(còn hạn)|1.Thông báo trả sách thành công. 2.Phiếu mượn cập nhật thành "Đã trả". 3.Vào tab "Sách" cập nhật thành trạng thái "Có sẵn". 4.Không có cảnh báo quá hạn|REQ -05|EP|
 | | | | | | | | |
 
