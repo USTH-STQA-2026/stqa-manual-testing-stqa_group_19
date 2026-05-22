@@ -54,6 +54,17 @@
 | Số sách đang mượn? | < 3 (BVA: 0, 1, 2) | MEM006 (0 sách) | Cho phép mượn |
 | | = 3 (BVA: giới hạn) | MEM đã mượn 3 sách | Từ chối, thông báo vượt giới hạn |
 
+### IDM — View Book List (REQ-02)
+| Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
+|---|---|---|---|
+|User Role Access|Librarian|`"librarian@library.com"`|Display the complete list of books with full detail(Title, Author, Genre, Publication Year, Status)|
+||Member|`"ba.nguyen@email.com"`|Display the complete list of books with full detail(Title, Author, Genre, Publication Year, Status)|
+|Real-time Data Update|Status Changed|`"BOOK001"` gets borrowed|The book status immediately changes to "Borrowed" on screen without needing a page refresh|
+||No Change|Leave screen as is|All book statuses remain unchanged.|
+
+| `<!-- Nhóm tự điền -->` | | | |
+
+
 ### IDM — `<!-- Nhóm tự bổ sung cho REQ-05 đến REQ-08 -->`
 
 | Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
@@ -71,7 +82,13 @@
 
 | Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
 |-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| | | | | | | | |
+|TC-01|Verify book list display for Member role|Member`"ba.nguyen@email.com"`is logged in|1. Navigate to the "Books" tab.<br>2. Observe the displayed list|None|Displays all 20 books. Each book includes: Title, Author, Genre, Publication Year, and Status|REQ-02|EP(IDM: Member)|
+|TC-02|Verify real-time book status update on UI|Librarian and Member open the app in two different windows/sessions|1. Librarian lends `"BOOK001"`to a member.<br>2. Member checks their "Books" tab immediately|Book: `"BOOK001"`|The status of `"BOOK001"`on the Member's screen instantly changes from "Available" to "Borrowed" without page refresh|REQ-02|Happy Path(IDM: Status Changed)|
+|TC-03|Verify successful book borrowing under limit (< 3)|Logged in as `"biet.hoang@email.com"` (currently has 1 active borrow)| 1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then click "Borrow"|`"BOOK001"`|Displays a success message. A borrow record is created with a due date set to exactly +14 days from today|REQ-04|EP(IDM: Available, Active, < 3)|
+|TC-04|Verify borrow rejection at the boundary limit (= 3)|Logged in as `"ba.nguyen@email.com"` (currently has 3 active borrows)| 1. Go to "Books" tab.<br>2. Select any "Available" book (`"BOOK004"`).<br>3. Click the"+" button then "Borrow"|`"BOOK004"`|The system rejects the request and displays an error message stating the limit of 3 books is reached|REQ-04|BVA(IDM: = 3)|
+|TC-05|Verify borrow rejection for "Suspended" member|Logged in as `"cu.le@email.com"` (Member status: Suspended)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Suspended" account status|REQ-04|DT/EP(IDM: Suspended)|
+|TC-06|Verify borrow rejection for an already "Borrowed" book|Logged in as `"dam.tran@email.com"`|1. Go to "Books" tab.<br>2. Search or locate `"BOOK003"` (Status: Borrowed).<br>3. Observe the book card|`"BOOK003"`|The "+" borrow button is completely hidden/disabled for this book|REQ-04|EP(IDM: Borrowed)|
+|TC-07|Verify borrow rejection for "Expired" member|Logged in as `"binh.pham@email.com"` (Member status: Expired)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Expired" account status|REQ-04|EP(IDM: Expired)|
 
 ---
 
