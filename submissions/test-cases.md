@@ -75,6 +75,10 @@
 |TC-02 |Return an overdue book- allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is diplayed 3. BR001 status -> "Returned" . 4. BOOK003 status -> "Available" |REQ -05 |EP, BVA |
 |TC-03 |Cannot return a book borrowed by another member |Logged in ba.nguyen@email.com. BOOK013 is borrowed by another member, not MEM002 |1. Go to "Borrow/Return" tab. 2. Find BOOK013 in "My borrow records" |Account of MEM002 but BOOK013 is borrowed by MEM006 |1. Can not find BOOK013 in MEM002's list. 2. No "Return" button available for BOOK013. 3. System does not allow returning another member's book |REQ -05 |EP |
 |TC-04| Book status updates immediately after return| Logged in as ba.nguyen@email.com.  BOOK003 currently shows "Borrowed" in Books tab|1.Go to "Borrow/Retur". 2. Find BR001 in "My borrow records". 3. Click "Return book" . 4. Immediately go back to "Books" tab. 5. Find BOOK003 |Record:BR001, BOOK003 |1.1. Before return: BOOK003 = "Borrowed". 2. After return: BOOK003 = "Available" — updates immediately |REQ -05 |EP |
+|TC-05 |Librarian call view all borrow records from all members | Logged in as librarian@library.com. |1. Go to "Borrow/ Return tab. 2. View the full value records list. 3. Check if records from multiple members are visible | Account: librarian@library.com|1. All 5 seed records (BR001–BR005) are visible. 2. Records belong to different members (MEM002, MEM003, MEM006).3. Each record shows: record ID, book name, borrow date, due date, status. |REQ -08 |EP |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
 | | | | | | | | |
 ---
 
