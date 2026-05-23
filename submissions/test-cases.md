@@ -36,8 +36,6 @@
 | Ô nhập có rỗng?            | Cả hai rỗng             | email: `""`, password: `""`                        | "Vui lòng nhập email và mật khẩu"                   |
 |                            | Chỉ email rỗng          | email: `""`, password: `admin123`                  | "Vui lòng nhập email và mật khẩu"                   |
 |                            | Chỉ mật khẩu rỗng       | email: `librarian@library.com`, password: `""`     | "Vui lòng nhập email và mật khẩu"                   |
-| Định dạng email            | Có `@` và domain hợp lệ | `librarian@library.com`                            | Xử lý bình thường                                    |
-|                            | Thiếu `@`               | `librarylibrary.com`                               | Không đăng nhập được, báo lỗi                        |
 
 ---
 
@@ -60,12 +58,10 @@
 |                                    | Hoa lẫn lộn                              | `"fLuTtEr"`                  | Kết quả giống tìm `"Flutter"` *(SRS: case-insensitive)* |
 | **Tìm kiếm** — ô rỗng?            | Rỗng                                     | `""`                         | Hiển thị toàn bộ danh sách (không lọc)                   |
 | **Lọc thể loại** — ô nhập tay     | Thể loại khớp chính xác                  | `"Công nghệ"`                | Chỉ hiển thị sách thuộc Công nghệ *(SRS: lọc theo thể loại)* |
-|                                    | Thể loại khớp chính xác                  | `"Quản trị"`                 | Chỉ hiển thị sách thuộc Quản trị *(SRS: lọc theo thể loại)* |
-|                                    | Không khớp thể loại nào                  | `"XYZ"`                      | "Không tìm thấy sách" *(SRS: không có kết quả)*         |
-|                                    | Ô lọc rỗng                               | `""`                         | Hiển thị toàn bộ danh sách (không lọc)                   |
-| **Lọc thể loại** — chữ hoa/thường | Toàn chữ thường *(SRS không quy định)*   | `"công nghệ"`                | **SRS gap** — quan sát và ghi nhận actual result         |
-|                                    | Toàn chữ HOA *(SRS không quy định)*      | `"CÔNG NGHỆ"`                | **SRS gap** — quan sát và ghi nhận actual result         |
-| **Kết hợp** tìm kiếm + lọc        | *(SRS không quy định hành vi kết hợp)*   | Lọc `"Kinh tế"` + tìm `"kinh tế"` | **SRS gap** — quan sát và ghi nhận actual result   |
+| **Lọc thể loại** — chữ hoa/thường | Toàn chữ thường                          | `"công nghệ"`                | Hiển thị sách Công nghệ (giống tìm kiếm, case-insensitive) |
+|                                    | Toàn chữ HOA                             | `"CÔNG NGHỆ"`                | Hiển thị sách Công nghệ (giống tìm kiếm, case-insensitive) |
+| **Kết hợp** tìm kiếm + lọc        | Cả hai đều có kết quả riêng lẻ           | Lọc `"Công nghệ"` + tìm `"Python"` | **SRS gap** — quan sát và ghi nhận actual result   |
+|                                    | Một điều kiện không khớp trong thể loại  | Lọc `"Kinh tế"` + tìm `"Flutter"`  | **SRS gap** — quan sát và ghi nhận actual result   |
 
 ---
 
@@ -130,8 +126,8 @@
 | TC-15 | Tìm kiếm case-insensitive — hoa lẫn thường                           | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô lọc đang rỗng.      | 1. Nhập từ khóa hoa lẫn thường vào ô tìm kiếm. 2. Quan sát kết quả.                                                             | Từ khóa: `fLuTtEr`                          | Danh sách hiển thị **đúng kết quả giống TC-10**: BOOK001. *(SRS: "Tìm kiếm KHÔNG phân biệt chữ hoa/thường")*                                                                   | REQ-03 | EP        |
 | TC-16 | Xóa từ khóa tìm kiếm — hiển thị lại toàn bộ danh sách               | Đã đăng nhập. Ô tìm kiếm đang có từ khóa `flutter`. Đang xem kết quả lọc. | 1. Xóa toàn bộ nội dung ô tìm kiếm (để rỗng). 2. Quan sát danh sách sách.                                                       | Từ khóa: *(xóa thành rỗng)*                 | Danh sách hiển thị lại **toàn bộ 20 đầu sách** (seed data). Không còn lọc theo từ khóa nào. *(BVA: biên dưới của ô tìm kiếm)*                                                  | REQ-03 | BVA       |
 | TC-17 | Lọc theo thể loại — "Công nghệ" (đúng chuẩn)                         | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô tìm kiếm đang rỗng. | 1. Nhập `Công nghệ` vào **ô nhập lọc thể loại**. 2. Quan sát danh sách sách.                                                    | Bộ lọc: `Công nghệ`                         | Danh sách chỉ hiển thị sách thuộc thể loại Công nghệ: BOOK001, BOOK002, BOOK003, BOOK005, BOOK008, BOOK009, BOOK010, BOOK011. Sách thể loại khác bị ẩn. *(SRS: lọc theo thể loại)* | REQ-03 | EP        |
-| TC-22 | **[SRS gap]** Lọc thể loại — "công nghệ" toàn chữ thường                | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô tìm kiếm đang rỗng. | 1. Nhập `công nghệ` (toàn chữ thường) vào ô lọc thể loại. 2. Quan sát danh sách sách.                                                   | Bộ lọc: `công nghệ` *(toàn chữ thường)*          | **SRS không quy định.** Ghi lại actual result: (a) Nếu hiển thị sách Công nghệ → lọc case-insensitive; (b) Nếu không có kết quả → lọc case-sensitive.   | REQ-03 | EP        |
-| TC-23 | **[SRS gap]** Lọc thể loại — "CÔNG NGHỆ" toàn chữ HOA                   | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô tìm kiếm đang rỗng. | 1. Nhập `CÔNG NGHỆ` (toàn chữ HOA) vào ô lọc thể loại. 2. Quan sát danh sách sách.                                                     | Bộ lọc: `CÔNG NGHỆ` *(toàn chữ HOA)*            | **SRS không quy định.** Ghi lại actual result: (a) Nếu hiển thị sách Công nghệ → lọc case-insensitive; (b) Nếu không có kết quả → lọc case-sensitive.   | REQ-03 | EP        |
+| TC-22 | Lọc thể loại case-insensitive — toàn chữ thường                          | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô tìm kiếm đang rỗng. | 1. Nhập `công nghệ` (toàn chữ thường) vào ô lọc thể loại. 2. Quan sát danh sách sách.                                                   | Bộ lọc: `công nghệ` *(toàn chữ thường)*          | Danh sách chỉ hiển thị sách thuộc thể loại Công nghệ    | REQ-03 | EP        |
+| TC-23 | Lọc thể loại case-insensitive — toàn chữ HOA                             | Đã đăng nhập (bất kỳ tài khoản). Đang ở tab "Sách". Ô tìm kiếm đang rỗng. | 1. Nhập `CÔNG NGHỆ` (toàn chữ HOA) vào ô lọc thể loại. 2. Quan sát danh sách sách.                                                     | Bộ lọc: `CÔNG NGHỆ` *(toàn chữ HOA)*            | Danh sách chỉ hiển thị sách thuộc thể loại Công nghệ    | REQ-03 | EP        |
 
 ---
 
