@@ -1,101 +1,101 @@
-# Bug Reports — Báo cáo lỗi
+# Bug Reports
 
-> **Hướng dẫn**: Tạo 1 mục bug cho mỗi TC có kết quả **Fail**.
-> Xem [examples/sample-bug-report.md](../examples/sample-bug-report.md) để hiểu cách viết bug report tốt.
-> Mỗi bug cần: tiêu đề mô tả hành vi lỗi, bước tái hiện, expected vs actual, severity + giải thích.
+> **Instruction**: Create 1 bug item for each TC with a **Fail** result.
+> See [examples/sample-bug-report.md](../examples/sample-bug-report.md) to understand how to write a good bug report.
+> Each bug needs: descriptive title for error behavior, steps to reproduce, expected vs actual, severity + explanation.
 
-| Thông tin | |
+| Information | |
 |---|---|
-| **Nhóm** | Nhóm 19 |
-| **Ngày báo cáo** | 22/05/2026 |
+| **Group** | Group 19 |
+| **Report Date** | 22/05/2026 |
 
 ---
 
 ## BUG-01
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-01 |
-| **TC liên quan** | TC-22, TC-23 |
-| **REQ liên quan** | REQ-03 |
-| **Mức độ** | Low |
-| **Người phát hiện** | Nguyễn Tùng Dương |
-| **Ngày phát hiện** | 22/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-01 |
+| **Related TC** | TC-22, TC-23 |
+| **Related REQ** | REQ-03 |
+| **Severity** | Low |
+| **Reporter** | Nguyen Tung Duong |
+| **Date Found** | 22/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Lọc thể loại phân biệt chữ hoa/thường gây lỗi "Không tìm thấy sách"
+**Title:**
+Category filter is case-sensitive, causing "Book not found" error
 
-**Môi trường:**
-- Trình duyệt: Chrome 136.0.7103.93
-- Hệ điều hành: Windows 11
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 136.0.7103.93
+- OS: Windows 11
+- UI Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-Đã đăng nhập thành công. Đang ở tab "Sách". Ô tìm kiếm đang rỗng.
+**Prerequisites:**
+Successfully logged in. Currently on "Books" tab. Search box is empty.
 
-**Bước tái hiện:**
-1. Nhập từ khóa `công nghệ` (toàn chữ thường) hoặc `CÔNG NGHỆ` (toàn chữ HOA) vào ô nhập lọc thể loại.
-2. Quan sát kết quả danh sách sách được hiển thị.
+**Steps to Reproduce:**
+1. Enter the keyword `công nghệ` (all lowercase) or `CÔNG NGHỆ` (all uppercase) into the category filter input box.
+2. Observe the resulting list of books displayed.
 
-**Kết quả mong đợi:**
-Hệ thống lọc không phân biệt hoa/thường (case-insensitive) giống như ô tìm kiếm, trả về các sách thuộc thể loại "Công nghệ".
+**Expected Result:**
+The filter system should be case-insensitive, just like the search box, returning books under the "Công nghệ" (Technology) category.
 
-**Kết quả thực tế:**
-Danh sách sách trống, hiển thị thông báo "Không tìm thấy sách". Ô lọc hiện tại đang phân biệt chữ hoa chữ thường.
+**Actual Result:**
+The book list is empty, displaying the message "Không tìm thấy sách" (Book not found). The filter box is currently case-sensitive.
 
-**Tác động:**
-Gây nhầm lẫn cho người dùng khi gõ chữ thường/hoa, mang lại trải nghiệm không đồng nhất với ô tìm kiếm (vốn không phân biệt hoa thường).
+**Impact:**
+Causes confusion for users when typing lower/uppercase, resulting in an inconsistent experience with the search box (which is case-insensitive).
 
-**Minh chứng:**
+**Evidence:**
 —
 
-**Đề xuất xử lý:**
-Bổ sung hàm chuẩn hóa chữ thường (VD: `toLowerCase()`) cho cả từ khóa lọc và dữ liệu thể loại sách trước khi so sánh.
+**Proposed Solution:**
+Add a lowercase normalization function (e.g., `toLowerCase()`) for both the filter keyword and the book category data before comparing.
 
 ---
 
 ## BUG-02
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-02 |
-| **TC liên quan** | TC-26 |
-| **REQ liên quan** | REQ-03 |
-| **Mức độ** | Medium |
-| **Người phát hiện** | Hà Đăng Huy |
-| **Ngày phát hiện** | 22/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-02 |
+| **Related TC** | TC-26 |
+| **Related REQ** | REQ-03 |
+| **Severity** | Medium |
+| **Reporter** | Ha Dang Huy |
+| **Date Found** | 22/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Kết hợp tìm kiếm và lọc hoạt động không nhất quán khi ô tìm kiếm không có kết quả
+**Title:**
+Combined search and filter behave inconsistently when the search box has no results
 
-**Môi trường:**
-- Trình duyệt: Chrome 136.0.7103.93
-- Hệ điều hành: Windows 11
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 136.0.7103.93
+- OS: Windows 11
+- UI Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-Đã đăng nhập thành công. Đang ở tab "Sách".
+**Prerequisites:**
+Successfully logged in. Currently on "Books" tab.
 
-**Bước tái hiện:**
-1. Nhập `Kinh tế` vào ô lọc thể loại (có sách thuộc thể loại Kinh tế).
-2. Nhập `Flutter` vào ô tìm kiếm.
-3. Quan sát kết quả danh sách sách.
+**Steps to Reproduce:**
+1. Enter `Kinh tế` into the category filter box (there are books in the Economy category).
+2. Enter `Flutter` into the search box.
+3. Observe the list of books.
 
-**Kết quả mong đợi:**
-Hệ thống áp dụng logic "AND" một cách nhất quán (như đã thấy ở TC-25). Do không có sách nào tên "Flutter" trong thể loại "Kinh tế", hệ thống phải trả về danh sách rỗng và hiển thị "Không tìm thấy sách".
+**Expected Result:**
+The system consistently applies the "AND" logic (as seen in TC-25). Since there are no books named "Flutter" in the "Kinh tế" category, the system should return an empty list and display "Không tìm thấy sách" (Book not found).
 
-**Kết quả thực tế:**
-Hệ thống dường như bỏ qua điều kiện tìm kiếm, tiếp tục hiển thị toàn bộ sách thuộc thể loại "Kinh tế" (BOOK007, BOOK014, BOOK015).
+**Actual Result:**
+The system seems to ignore the search condition and continues to display all books in the "Kinh tế" category (BOOK007, BOOK014, BOOK015).
 
-**Tác động:**
-Logic tìm kiếm kết hợp lọc bị lỗi, trả về sai kết quả khi một trong hai điều kiện không khớp, làm sai lệch kỳ vọng của người dùng.
+**Impact:**
+Combined search logic is flawed, returning incorrect results when one of the two conditions does not match, which misleads user expectations.
 
-**Minh chứng:**
+**Evidence:**
 —
 
-**Đề xuất xử lý:**
-Cập nhật logic lấy danh sách sách: Phải áp dụng đồng thời (AND) cả 2 filter. Nếu một trong 2 không thỏa mãn, list kết quả cuối cùng phải là rỗng.
+**Proposed Solution:**
+Update the book list retrieval logic: Both filters must be applied simultaneously (AND). If either condition is not met, the final result list must be empty.
 
 ---

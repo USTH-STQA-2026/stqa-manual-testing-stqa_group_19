@@ -1,90 +1,88 @@
-bash
+# Test Execution
 
-# Test Execution — Kết quả thực thi kiểm thử
+> **Instruction**: Run each TC on the system https://stqa.rbc.vn, record actual results.
+> Conclusion: **Pass** (correct result), **Fail** (incorrect result -> create bug report), **Blocked** (cannot be executed due to another blocking bug), **Not Run** (not executed yet).
 
-> **Hướng dẫn**: Chạy từng TC trên hệ thống https://stqa.rbc.vn, ghi lại kết quả thực tế.
-> Kết luận: **Pass** (kết quả đúng), **Fail** (kết quả sai → tạo bug report), **Blocked** (không thực hiện được vì lỗi khác chặn), **Not Run** (chưa chạy).
-
-| Thông tin        |                      |
+| Information        |                      |
 | ---------------- | -------------------- |
-| **Nhóm**         | Nhóm 19              |
-| **Ngày thực thi**| 22/05/2026           |
-| **Trình duyệt**  | Chrome 136.0.7103.93 |
-| **Hệ điều hành** | Windows 11           |
+| **Group**         | Group 19              |
+| **Execution Date**| 22/05/2026           |
+| **Browser**  | Chrome 136.0.7103.93 |
+| **OS** | Windows 11           |
 
 ---
 
-## Kết quả chi tiết
+## Detailed Results
 
-### REQ-01 — Đăng nhập
+### REQ-01 — Login
 
-| Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt)                               | Kết quả thực tế                                                                                             | Kết luận | Minh chứng | Bug    |
+| TC ID | Functional Group | Expected Result (Summary)                               | Actual Result                                                                                             | Conclusion | Evidence | Bug    |
 | ----- | -------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------ |
-| TC-01 | Đăng nhập      | Chuyển trang chủ, AppBar hiển thị "Thủ thư"              | Hệ thống chuyển sang trang chủ. AppBar hiển thị tên và vai trò "Thủ thư". Tab "Thành viên" xuất hiện.      | **Pass** | —          | —      |
-| TC-02 | Đăng nhập      | Chuyển trang chủ, AppBar hiển thị "Thành viên"           | Hệ thống chuyển sang trang chủ. AppBar hiển thị "Ba Nguyễn — Thành viên". Tab "Thành viên" không hiển thị. | **Pass** | —          | —      |
-| TC-03 | Đăng nhập      | "Không tìm thấy thành viên"                              | Hệ thống không chuyển trang. Hiển thị thông báo "Không tìm thấy thành viên".                               | **Pass** | —          | —      |
-| TC-04 | Đăng nhập      | "Mật khẩu không đúng"                                    | Hệ thống không chuyển trang. Hiển thị thông báo "Mật khẩu không đúng".                                     | **Pass** | —          | —      |
-| TC-05 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
-| TC-06 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
-| TC-07 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
+| TC-01 | Login      | Go to home page, AppBar displays "Thủ thư"              | System redirects to home page. AppBar shows name and role "Thủ thư". "Thành viên" tab appears.      | **Pass** | —          | —      |
+| TC-02 | Login      | Go to home page, AppBar displays "Thành viên"           | System redirects to home page. AppBar shows "Ba Nguyễn — Thành viên". "Thành viên" tab does not appear. | **Pass** | —          | —      |
+| TC-03 | Login      | "Không tìm thấy thành viên"                              | System does not redirect. Displays message "Không tìm thấy thành viên".                               | **Pass** | —          | —      |
+| TC-04 | Login      | "Mật khẩu không đúng"                                    | System does not redirect. Displays message "Mật khẩu không đúng".                                     | **Pass** | —          | —      |
+| TC-05 | Login      | "Vui lòng nhập email và mật khẩu"                        | System does not redirect. Displays message "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
+| TC-06 | Login      | "Vui lòng nhập email và mật khẩu"                        | System does not redirect. Displays message "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
+| TC-07 | Login      | "Vui lòng nhập email và mật khẩu"                        | System does not redirect. Displays message "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
 
 ---
 
-### REQ-03 — Tìm kiếm và lọc sách (TC có căn cứ SRS)
+### REQ-03 — Search and Filter Books (TCs based on SRS)
 
-| Mã TC | Nhóm chức năng     | Kết quả mong đợi (tóm tắt)                                       | Kết quả thực tế                                                                                               | Kết luận | Minh chứng | Bug |
+| TC ID | Functional Group     | Expected Result (Summary)                                       | Actual Result                                                                                               | Conclusion | Evidence | Bug |
 | ----- | ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------- | ---------- | --- |
-| TC-10 | Tìm kiếm & lọc    | Chỉ hiển thị BOOK001 khi tìm "Flutter"                           | Danh sách chỉ hiển thị BOOK001 "Lập trình Flutter cơ bản". Các sách khác bị ẩn.                             | **Pass** | —          | —   |
-| TC-11 | Tìm kiếm & lọc    | Hiển thị BOOK001, BOOK009 khi tìm "Nguyễn Minh Đức"             | Danh sách hiển thị BOOK001 và BOOK009. Sách của tác giả khác bị ẩn.                                         | **Pass** | —          | —   |
-| TC-12 | Tìm kiếm & lọc    | "Không tìm thấy sách" khi tìm "XYZ123abc"                       | Danh sách không hiển thị sách nào. Hiển thị thông báo "Không tìm thấy sách".                                | **Pass** | —          | —   |
-| TC-13 | Tìm kiếm & lọc    | Kết quả giống TC-10 khi tìm "flutter" (chữ thường)              | Danh sách hiển thị BOOK001. Tìm kiếm không phân biệt hoa/thường.                                            | **Pass** | —          | —   |
-| TC-14 | Tìm kiếm & lọc    | Kết quả giống TC-10 khi tìm "FLUTTER" (chữ HOA)                 | Danh sách hiển thị BOOK001. Tìm kiếm không phân biệt hoa/thường.                                            | **Pass** | —          | —   |
-| TC-15 | Tìm kiếm & lọc    | Kết quả giống TC-10 khi tìm "fLuTtEr" (hoa lẫn lộn)            | Danh sách hiển thị BOOK001. Tìm kiếm không phân biệt hoa/thường.                                            | **Pass** | —          | —   |
-| TC-16 | Tìm kiếm & lọc    | Hiển thị lại 20 sách khi xóa ô tìm kiếm thành rỗng              | Danh sách hiển thị lại toàn bộ 20 đầu sách. Không còn lọc theo từ khóa nào.                                 | **Pass** | —          | —   |
-| TC-17 | Tìm kiếm & lọc    | Chỉ hiển thị sách Công nghệ khi nhập "Công nghệ" vào ô lọc      | Danh sách chỉ hiển thị BOOK001, 002, 003, 005, 008, 009, 010, 011. Sách thể loại khác bị ẩn.                | **Pass** | —          | —   |
-| TC-22 | Tìm kiếm & lọc    | Lọc "công nghệ" (chữ thường)                                   | Danh sách không hiển thị sách nào. Ô lọc phân biệt hoa/thường.                                            | **Fail** | —          | BUG-01 |
-| TC-23 | Tìm kiếm & lọc    | Lọc "CÔNG NGHỆ" (chữ HOA)                                      | Danh sách không hiển thị sách nào. Ô lọc phân biệt hoa/thường.                                            | **Fail** | —          | BUG-01 |
+| TC-10 | Search & Filter    | Only display BOOK001 when searching "Flutter"                           | List only displays BOOK001 "Lập trình Flutter cơ bản". Other books are hidden.                             | **Pass** | —          | —   |
+| TC-11 | Search & Filter    | Display BOOK001, BOOK009 when searching "Nguyễn Minh Đức"             | List displays BOOK001 and BOOK009. Books by other authors are hidden.                                         | **Pass** | —          | —   |
+| TC-12 | Search & Filter    | "Không tìm thấy sách" when searching "XYZ123abc"                       | List does not display any book. Displays message "Không tìm thấy sách".                                | **Pass** | —          | —   |
+| TC-13 | Search & Filter    | Result same as TC-10 when searching "flutter" (lowercase)              | List displays BOOK001. Search is case-insensitive.                                            | **Pass** | —          | —   |
+| TC-14 | Search & Filter    | Result same as TC-10 when searching "FLUTTER" (uppercase)                 | List displays BOOK001. Search is case-insensitive.                                            | **Pass** | —          | —   |
+| TC-15 | Search & Filter    | Result same as TC-10 when searching "fLuTtEr" (mixed case)            | List displays BOOK001. Search is case-insensitive.                                            | **Pass** | —          | —   |
+| TC-16 | Search & Filter    | Re-display 20 books when clearing search box to empty              | List displays all 20 book titles again. No longer filtered by any keyword.                                 | **Pass** | —          | —   |
+| TC-17 | Search & Filter    | Only display Công nghệ books when entering "Công nghệ" into filter box      | List only displays BOOK001, 002, 003, 005, 008, 009, 010, 011. Books from other categories are hidden.                | **Pass** | —          | —   |
+| TC-22 | Search & Filter    | Filter "công nghệ" (lowercase)                                   | List displays no books. Filter is case-sensitive.                                            | **Fail** | —          | BUG-01 |
+| TC-23 | Search & Filter    | Filter "CÔNG NGHỆ" (uppercase)                                      | List displays no books. Filter is case-sensitive.                                            | **Fail** | —          | BUG-01 |
 
 ---
 
-### REQ-03 — Ghi nhận SRS Gap (TC-25 → TC-26)
+### REQ-03 — Record SRS Gap (TC-25 → TC-26)
 
-> Các TC này được thực thi để **quan sát hành vi thực tế**, không áp đặt expected result từ SRS vì SRS không đặc tả.
-> - **TC-25, TC-26**: Kiểm tra hành vi khi dùng tìm kiếm + lọc đồng thời (SRS không quy định AND/OR logic).
+> These TCs are executed to **observe actual behavior**, not imposing an expected result from SRS because the SRS is not specified.
+> - **TC-25, TC-26**: Test behavior when using search + filter simultaneously (SRS does not specify AND/OR logic).
 
-| Mã TC | Nhóm chức năng     | Quan sát (không phải expected result)                                         | Kết quả thực tế                                                                                                                                           | Kết luận                    | Minh chứng | Bug    |
+| TC ID | Functional Group     | Observation (not expected result)                                         | Actual Result                                                                                                                                           | Conclusion                    | Evidence | Bug    |
 | ----- | ------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ---------- | ------ |
-| TC-25 | SRS Gap — kết hợp  | Quan sát: lọc "Công nghệ" + tìm "Python" — hệ thống dùng AND hay OR?        | Danh sách hiển thị **chỉ BOOK009** "Nhập môn lập trình Python". Xác nhận hệ thống dùng **AND logic** (lọc thể loại VÀ tìm kiếm đều được áp dụng).       | **Pass** *(SRS gap — quan sát)* | —      | —      |
-| TC-26 | SRS Gap — kết hợp  | Quan sát: lọc "Kinh tế" + tìm "Flutter" — kết quả khi AND không có sách nào? | Danh sách hiển thị **BOOK007, BOOK014, BOOK015** (toàn bộ sách Kinh tế). Ô tìm kiếm "Flutter" bị **bỏ qua** khi không có kết quả khớp trong thể loại — hành vi **không nhất quán** với TC-25 (AND logic). | **Fail** *(SRS gap)*        | —          | BUG-02 |
+| TC-25 | SRS Gap — combine  | Observation: filter "Công nghệ" + search "Python" — system uses AND or OR?        | List displays **only BOOK009** "Nhập môn lập trình Python". Confirm system uses **AND logic** (both category filter AND search are applied).       | **Pass** *(SRS gap — observe)* | —      | —      |
+| TC-26 | SRS Gap — combine  | Observation: filter "Kinh tế" + search "Flutter" — result when AND has no books? | List displays **BOOK007, BOOK014, BOOK015** (all Kinh tế books). The "Flutter" search is **ignored** as there's no matching result in category — behavior is **inconsistent** with TC-25 (AND logic). | **Fail** *(SRS gap)*        | —          | BUG-02 |
 
 ---
 
-## Tổng hợp kết quả
+## Result Summary
 
-| Chỉ số              | Giá trị |
+| Metric              | Value |
 | ------------------- | ------- |
-| Tổng số test case   | 19      |
+| Total test cases   | 19      |
 | Pass                | 16      |
 | Fail                | 3       |
 | Blocked             | 0       |
 | Not Run             | 0       |
-| **Tỷ lệ Pass**      | **84.2%** |
+| **Pass Rate**      | **84.2%** |
 
-### Kết quả theo nhóm chức năng
+### Results by Functional Group
 
-| Nhóm                                      | Tổng TC | Pass | Fail | Tỷ lệ Pass |
+| Group                                      | Total TC | Pass | Fail | Pass Rate |
 | ----------------------------------------- | ------- | ---- | ---- | ---------- |
-| REQ-01 — Đăng nhập                        | 7       | 7    | 0    | 100%       |
-| REQ-03 — Tìm kiếm & lọc (có SRS)         | 10      | 8    | 2    | 80%        |
+| REQ-01 — Login                        | 7       | 7    | 0    | 100%       |
+| REQ-03 — Search & Filter (with SRS)         | 10      | 8    | 2    | 80%        |
 | REQ-03 — SRS Gap (TC-25 → TC-26)         | 2       | 1    | 1    | 50%        |
-| **Tổng**                                  | **19**  | **16** | **3** | **84.2%** |
+| **Total**                                  | **19**  | **16** | **3** | **84.2%** |
 
 ---
 
-> ### 📝 Ghi chú tổng hợp
+> ### 📝 Summary Notes
 >
-> **Lưu ý về các test case Fail:**
+> **Notes on Fail test cases:**
 >
-> 1. **BUG-01** (TC-22, TC-23): Ô lọc thể loại **phân biệt hoa/thường**. Người dùng nhập "công nghệ" → không tìm thấy sách. SRS chỉ yêu cầu case-insensitive cho ô *tìm kiếm*, không đề cập ô lọc. Việc thiếu đồng nhất này có thể gây hiểu lầm cho người dùng. Khuyến nghị: BA cần bổ sung đặc tả, Dev nên xử lý case-insensitive cho cả ô lọc để đồng nhất UX.
+> 1. **BUG-01** (TC-22, TC-23): The category filter box is **case-sensitive**. User inputs "công nghệ" -> no books found. SRS only requires case-insensitive for the *search* box, and does not mention the filter box. This lack of consistency can confuse users. Recommendation: BA needs to supplement the specification, Dev should handle case-insensitive for both the filter box and search box to standardize UX.
 >
-> 2. **BUG-02** (TC-26): Hành vi kết hợp tìm kiếm + lọc **không nhất quán** — TC-25 xác nhận AND logic hoạt động khi có kết quả, nhưng TC-26 cho thấy khi AND không có kết quả, hệ thống **bỏ qua ô tìm kiếm** và chỉ hiển thị kết quả lọc thể loại. SRS không đặc tả trường hợp này — đây là SRS gap và đồng thời là lỗi logic không nhất quán.
+> 2. **BUG-02** (TC-26): Combined search + filter behavior is **inconsistent** — TC-25 confirmed AND logic works when there is a result, but TC-26 shows when AND has no result, the system **ignores the search box** and only displays category filter results. SRS does not specify this case — this is an SRS gap and simultaneously an inconsistent logic bug.
