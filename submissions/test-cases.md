@@ -54,7 +54,20 @@
 | Số sách đang mượn?        | < 3 (BVA: 0, 1, 2)  | MEM006 (0 sách)          | Cho phép mượn                    |
 |                           | = 3 (BVA: giới hạn) | MEM đã mượn 3 sách       | Từ chối, thông báo vượt giới hạn |
 
-### IDM — Add member REQ-07
+### IDM — Overdue Handling (REQ-06)
+
+| Đặc tính (Characteristic) | Phân vùng (Block)      | Giá trị đại diện (Value) | Kết quả mong đợi                 |
+| ------------------------- | ---------------------- | ------------------------ | -------------------------------- |
+| dueDate                   | dueDate < current date | BR001                    | Overdue                          |
+|                           | dueDate = current date |                          | Overdue                          |
+|                           | dueDate > current date | BR002                    | prompt                           |
+| Trạng thái thành viên?    | Hoạt động              | MEM002                   | Cho phép mượn                    |
+|                           | Tạm ngưng              | MEM004                   | Từ chối, thông báo lỗi           |
+|                           | Hết hạn                | MEM005                   | Từ chối, thông báo lỗi           |
+| Số sách đang mượn?        | < 3 (BVA: 0, 1, 2)     | MEM006 (0 sách)          | Cho phép mượn                    |
+|                           | = 3 (BVA: giới hạn)    | MEM đã mượn 3 sách       | Từ chối, thông báo vượt giới hạn |
+
+### IDM — Member Management (REQ-07)
 
 | Đặc tính (Characteristic) | Phân vùng (Block)                   | Giá trị đại diện (Value) | Kết quả mong đợi                    |
 | ------------------------- | ----------------------------------- | ------------------------ | ----------------------------------- |
@@ -79,9 +92,19 @@
 <!-- Tự tổ chức bảng test case: có thể chia nhóm theo chức năng, theo REQ, hoặc theo luồng nghiệp vụ — tùy nhóm quyết định. -->
 <!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
 
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-| ----- | ----------------- | -------------- | -------------- | --------------- | ---------------- | --- | -------- |
-|       |                   |                |                |                 |                  |     |          |
+| Mã TC | Mục tiêu kiểm thử                                                                               | Tiền điều kiện                                                                       | Bước thực hiện                                                                                                                            | Dữ liệu đầu vào                                                      | Kết quả mong đợi                                   | REQ   | Kỹ thuật |
+| ----- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------- | ----- | -------- |
+| TC-01 | Check the record with a due date == today's date - 1                                            | The BR007 record exists, with status "Borrowing"                                     | 1. Log in using your Librarian account. 2. Click the "Check Expired" button.                                                              | System date: 5/23/2026. (dueDate == 5/22/2026)                       | BR001 changed to Overdue.                          | REQ-6 | EP, BVA  |
+| TC-02 | Check the record with a due date == today's date + 1                                            | The BR006 record exists, with status "Borrowing"                                     | 1. Log in using your Librarian account. 2. Click the "Check Expired" button.                                                              | System date: 5/23/2026. (dueDate == 5/22/2026)                       | BR006 doesn't change                               | REQ-6 | EP, BVA  |
+| TC-03 | Check the record with a due date == today's date                                                | The BR008 record exists, with status "Borrowing"                                     | 1. Log in using your Librarian account. 2. Click the "Check Expired" button.                                                              | System date: 5/23/2026. (dueDate == 5/23/2026)                       | BR006 change to overdue                            | REQ-6 | EP, BVA  |
+| TC-04 | Check The system will ignore overdue records that have been returned.                           | The BR002 record exists, with status "Returned"                                      | 1. Log in using your Librarian account. 2. Click the "Check Expired" button.                                                              | System date: 5/23/2026. (dueDate == 24/08/2024) Status = Returned    | BR002 doesn't change                               | REQ-6 | EP, BVA  |
+| TC-05 | Members can view their OWN overdue records.                                                     | Dam.tran's BR005 record is in Overdue status.                                        | 1. Log in using dam.tran account. 2. Click the "Borrowed/Returned" tab                                                                    | Log in using the account dam.tran                                    | BR005 is displaying a "Overdue" status.            | REQ-6 | ACC      |
+| TC-06 | Librarian can view all the overdue records.                                                     | Dam.tran's BR005 record and ba.nguyen's BR001 are in Overdue status.                 | 1. Log in using Librarian account. 2. Click the "Borrowed/Returned" tab 3. Click the "Check Expired" button.                              | Log in using the Librarian account.                                  | BR005 and BR001 are displaying a "Overdue" status. | REQ-6 | ACC      |
+| TC-07 | The member intentionally viewed someone else's expired records.                                 | Dam.tran's BR005 record is in Overdue status.                                        | 1. Log in using ba.nguyen account. 2. Click the "Borrowed/Returned" tab 3. Click the "search borrowed records" tab 4. Search for "MEM006" | Log in using ba.nguyen account.                                      | No other dam.tran's records appeared.              | REQ-6 | ACC      |
+| TC-08 | Verify that the "Add Member Successfully" (Happy Path) flow has been completed.                 | 1. Log in using Librarian account. 2. The email doesn't exist                        | 1. Log in using Librarian account. 2. Click the "Add member" button. 3. Enter the information. 4. Click the "Add member" button           | Full Name: ABC. Email: new.user@test.com. Phone number: 0123456789   | Successfully                                       | REQ-7 | EP, ACC  |
+| TC-09 | Catching email formatting errors: Missing @ character.                                          | 1. Log in using Librarian account.                                                   | 1. Log in using Librarian account. 2. Click the "Add member" button. 3. Enter the information. 4. Click the "Add member" button           | Full Name: ABC. Email: userdomain.com. Phone number: 0123456789      | Invalid email                                      | REQ-7 | EP, ACC  |
+| TC-10 | Catching email formatting errors: There is an @ symbol but NO period (.) in the domain section. | 1. Log in using Librarian account.                                                   | 1. Log in using Librarian account. 2. Click the "Add member" button. 3. Enter the information. 4. Click the "Add member" button           | Full Name: ABC. Email: userdomain.com. Phone number: 0123456789      | Invalid email                                      | REQ-7 | EP, ACC  |
+| TC-11 | Ensure the system blocks the creation of DUPLICATE emails.                                      | 1. Log in using Librarian account. 2. The email "ba.nguyen@email.com" already exists | 1. Log in using Librarian account. 2. Click the "Add member" button. 3. Enter the information. 4. Click the "Add member" button           | Full Name: ABC. Email: ba.nguyen@email.com. Phone number: 0123456789 | Email already exists                               | REQ-7 | EP, ACC  |
 
 ---
 
