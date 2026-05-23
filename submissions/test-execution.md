@@ -27,8 +27,6 @@ bash
 | TC-05 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
 | TC-06 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
 | TC-07 | Đăng nhập      | "Vui lòng nhập email và mật khẩu"                        | Hệ thống không chuyển trang. Hiển thị thông báo "Vui lòng nhập email và mật khẩu".                         | **Pass** | —          | —      |
-| TC-08 | Đăng nhập      | Không đăng nhập được, báo lỗi định dạng hoặc không tìm thấy | Hệ thống không chuyển trang. Hiển thị "Không tìm thấy thành viên".                                      | **Pass** | —          | —      |
-| TC-09 | Đăng nhập      | AppBar hiển thị đúng tên và vai trò "Thành viên"         | AppBar hiển thị "Ba Nguyễn — Thành viên". Tab "Thành viên" (quản lý) không xuất hiện.                      | **Pass** | —          | —      |
 
 ---
 
@@ -44,24 +42,18 @@ bash
 | TC-15 | Tìm kiếm & lọc    | Kết quả giống TC-10 khi tìm "fLuTtEr" (hoa lẫn lộn)            | Danh sách hiển thị BOOK001. Tìm kiếm không phân biệt hoa/thường.                                            | **Pass** | —          | —   |
 | TC-16 | Tìm kiếm & lọc    | Hiển thị lại 20 sách khi xóa ô tìm kiếm thành rỗng              | Danh sách hiển thị lại toàn bộ 20 đầu sách. Không còn lọc theo từ khóa nào.                                 | **Pass** | —          | —   |
 | TC-17 | Tìm kiếm & lọc    | Chỉ hiển thị sách Công nghệ khi nhập "Công nghệ" vào ô lọc      | Danh sách chỉ hiển thị BOOK001, 002, 003, 005, 008, 009, 010, 011. Sách thể loại khác bị ẩn.                | **Pass** | —          | —   |
-| TC-18 | Tìm kiếm & lọc    | Chỉ hiển thị sách Quản trị khi nhập "Quản trị" vào ô lọc        | Danh sách chỉ hiển thị BOOK004, BOOK012, BOOK013. Sách thể loại khác bị ẩn.                                 | **Pass** | —          | —   |
-| TC-19 | Tìm kiếm & lọc    | "Không tìm thấy sách" khi nhập thể loại không tồn tại "XYZ"     | Danh sách không hiển thị sách nào. Hiển thị thông báo "Không tìm thấy sách".                                | **Pass** | —          | —   |
-| TC-20 | Tìm kiếm & lọc    | Hiển thị lại 20 sách khi xóa ô lọc thể loại thành rỗng          | Danh sách hiển thị lại toàn bộ 20 đầu sách. Bộ lọc thể loại không còn áp dụng.                              | **Pass** | —          | —   |
-| TC-21 | Tìm kiếm & lọc    | Hiển thị BOOK008, BOOK011 khi tìm "Lý Văn Tài"                  | Danh sách hiển thị BOOK008 "Mạng máy tính" và BOOK011 "Hệ điều hành Linux". Sách khác bị ẩn.                | **Pass** | —          | —   |
+| TC-22 | Tìm kiếm & lọc    | Lọc "công nghệ" (chữ thường)                                   | Danh sách không hiển thị sách nào. Ô lọc phân biệt hoa/thường.                                            | **Fail** | —          | BUG-01 |
+| TC-23 | Tìm kiếm & lọc    | Lọc "CÔNG NGHỆ" (chữ HOA)                                      | Danh sách không hiển thị sách nào. Ô lọc phân biệt hoa/thường.                                            | **Fail** | —          | BUG-01 |
 
 ---
 
-### REQ-03 — Ghi nhận SRS Gap (TC-22 → TC-26)
+### REQ-03 — Ghi nhận SRS Gap (TC-25 → TC-26)
 
 > Các TC này được thực thi để **quan sát hành vi thực tế**, không áp đặt expected result từ SRS vì SRS không đặc tả.
-> - **TC-22, TC-23, TC-24**: Kiểm tra ô lọc thể loại có phân biệt hoa/thường không (SRS chỉ quy định case-insensitive cho ô tìm kiếm).
 > - **TC-25, TC-26**: Kiểm tra hành vi khi dùng tìm kiếm + lọc đồng thời (SRS không quy định AND/OR logic).
 
 | Mã TC | Nhóm chức năng     | Quan sát (không phải expected result)                                         | Kết quả thực tế                                                                                                                                           | Kết luận                    | Minh chứng | Bug    |
 | ----- | ------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ---------- | ------ |
-| TC-22 | SRS Gap — lọc      | Quan sát: ô lọc có nhận "công nghệ" (chữ thường) không?                      | Danh sách **không hiển thị sách nào**. Hiển thị "Không tìm thấy sách". Ô lọc **phân biệt hoa/thường** — "công nghệ" khác "Công nghệ".                  | **Fail** *(SRS gap)*        | —          | BUG-01 |
-| TC-23 | SRS Gap — lọc      | Quan sát: ô lọc có nhận "CÔNG NGHỆ" (chữ HOA) không?                        | Danh sách **không hiển thị sách nào**. Hiển thị "Không tìm thấy sách". Ô lọc **phân biệt hoa/thường** — "CÔNG NGHỆ" khác "Công nghệ".                  | **Fail** *(SRS gap)*        | —          | BUG-01 |
-| TC-24 | SRS Gap — lọc      | Quan sát: ô lọc có nhận "quản trị" (chữ thường) không?                       | Danh sách **không hiển thị sách nào**. Hiển thị "Không tìm thấy sách". Ô lọc **phân biệt hoa/thường** — "quản trị" khác "Quản trị".                    | **Fail** *(SRS gap)*        | —          | BUG-01 |
 | TC-25 | SRS Gap — kết hợp  | Quan sát: lọc "Công nghệ" + tìm "Python" — hệ thống dùng AND hay OR?        | Danh sách hiển thị **chỉ BOOK009** "Nhập môn lập trình Python". Xác nhận hệ thống dùng **AND logic** (lọc thể loại VÀ tìm kiếm đều được áp dụng).       | **Pass** *(SRS gap — quan sát)* | —      | —      |
 | TC-26 | SRS Gap — kết hợp  | Quan sát: lọc "Kinh tế" + tìm "Flutter" — kết quả khi AND không có sách nào? | Danh sách hiển thị **BOOK007, BOOK014, BOOK015** (toàn bộ sách Kinh tế). Ô tìm kiếm "Flutter" bị **bỏ qua** khi không có kết quả khớp trong thể loại — hành vi **không nhất quán** với TC-25 (AND logic). | **Fail** *(SRS gap)*        | —          | BUG-02 |
 
@@ -71,28 +63,28 @@ bash
 
 | Chỉ số              | Giá trị |
 | ------------------- | ------- |
-| Tổng số test case   | 26      |
-| Pass                | 22      |
-| Fail                | 4       |
+| Tổng số test case   | 19      |
+| Pass                | 16      |
+| Fail                | 3       |
 | Blocked             | 0       |
 | Not Run             | 0       |
-| **Tỷ lệ Pass**      | **84.6%** |
+| **Tỷ lệ Pass**      | **84.2%** |
 
 ### Kết quả theo nhóm chức năng
 
 | Nhóm                                      | Tổng TC | Pass | Fail | Tỷ lệ Pass |
 | ----------------------------------------- | ------- | ---- | ---- | ---------- |
-| REQ-01 — Đăng nhập                        | 9       | 9    | 0    | 100%       |
-| REQ-03 — Tìm kiếm & lọc (có SRS)         | 12      | 12   | 0    | 100%       |
-| REQ-03 — SRS Gap (TC-22 → TC-26)         | 5       | 1    | 4    | 20%        |
-| **Tổng**                                  | **26**  | **22** | **4** | **84.6%** |
+| REQ-01 — Đăng nhập                        | 7       | 7    | 0    | 100%       |
+| REQ-03 — Tìm kiếm & lọc (có SRS)         | 10      | 8    | 2    | 80%        |
+| REQ-03 — SRS Gap (TC-25 → TC-26)         | 2       | 1    | 1    | 50%        |
+| **Tổng**                                  | **19**  | **16** | **3** | **84.2%** |
 
 ---
 
 > ### 📝 Ghi chú tổng hợp
 >
-> **Các TC Fail đều thuộc nhóm SRS Gap** — không phải vi phạm trực tiếp SRS, mà là hành vi hệ thống trong các tình huống SRS chưa đặc tả:
+> **Lưu ý về các test case Fail:**
 >
-> 1. **BUG-01** (TC-22, TC-23, TC-24): Ô lọc thể loại **phân biệt hoa/thường**. Người dùng nhập "công nghệ" → không tìm thấy sách. SRS chỉ yêu cầu case-insensitive cho ô *tìm kiếm*, không đề cập ô lọc — đây là SRS gap. Khuyến nghị: BA cần bổ sung đặc tả, Dev nên xử lý case-insensitive cho cả ô lọc để đồng nhất UX.
+> 1. **BUG-01** (TC-22, TC-23): Ô lọc thể loại **phân biệt hoa/thường**. Người dùng nhập "công nghệ" → không tìm thấy sách. SRS chỉ yêu cầu case-insensitive cho ô *tìm kiếm*, không đề cập ô lọc. Việc thiếu đồng nhất này có thể gây hiểu lầm cho người dùng. Khuyến nghị: BA cần bổ sung đặc tả, Dev nên xử lý case-insensitive cho cả ô lọc để đồng nhất UX.
 >
 > 2. **BUG-02** (TC-26): Hành vi kết hợp tìm kiếm + lọc **không nhất quán** — TC-25 xác nhận AND logic hoạt động khi có kết quả, nhưng TC-26 cho thấy khi AND không có kết quả, hệ thống **bỏ qua ô tìm kiếm** và chỉ hiển thị kết quả lọc thể loại. SRS không đặc tả trường hợp này — đây là SRS gap và đồng thời là lỗi logic không nhất quán.
