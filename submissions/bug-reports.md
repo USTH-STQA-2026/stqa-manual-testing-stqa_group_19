@@ -1,3 +1,5 @@
+Hello world
+
 # Bug Reports — Báo cáo lỗi
 
 > **Hướng dẫn**: Tạo 1 mục bug cho mỗi TC có kết quả **Fail**.
