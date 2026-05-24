@@ -1,94 +1,273 @@
-Hello world
-
 # Bug Reports — Báo cáo lỗi
-
-> **Hướng dẫn**: Tạo 1 mục bug cho mỗi TC có kết quả **Fail**.
-> Xem [examples/sample-bug-report.md](../examples/sample-bug-report.md) để hiểu cách viết bug report tốt.
-> Mỗi bug cần: tiêu đề mô tả hành vi lỗi, bước tái hiện, expected vs actual, severity + giải thích.
 
 | Thông tin | |
 |---|---|
 | **Nhóm** | Group 19 |
-| **Ngày báo cáo** | 24/05/2016 |
+| **Ngày báo cáo** | 24/05/2026 |
 
 ---
 
 ## BUG-01
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-01 |
-| **TC liên quan** | `<!-- TC-xx -->` |
-| **REQ liên quan** | `<!-- REQ-xx -->` |
-| **Mức độ** | `<!-- High / Medium / Low -->` |
-| **Người phát hiện** | `<!-- Họ tên thành viên -->` |
-| **Ngày phát hiện** | `<!-- DD/MM/YYYY -->` |
-| **Trạng thái** | `<!-- Open / Closed -->` |
+| **Bug ID** | BUG-01 |
+| **Related TC** | TC-19, TC-20 |
+| **Related REQ** | REQ-03 |
+| **Severity** | Low |
+| **Reporter** | Nguyen Tung Duong |
+| **Date Found** | 22/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-`<!-- Mô tả hành vi lỗi cụ thể -->`
+**Title:**
+Category filter is case-sensitive, causing "Book not found" error
 
-**Môi trường:**
-- Trình duyệt: Chrome `<!-- version -->`
-- Hệ điều hành: `<!-- OS -->`
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 136.0.7103.93
+- OS: Windows 11
+- UI Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-`<!-- VD: Trang đăng nhập đã mở, dữ liệu đã reset -->`
+**Prerequisites:**
+Successfully logged in. Currently on "Books" tab. Search box is empty.
 
-**Bước tái hiện:**
-1. `<!-- Bước 1 -->`
-2. `<!-- Bước 2 -->`
-3. `<!-- Bước 3 -->`
+**Steps to Reproduce:**
+1. Enter the keyword `công nghệ` (all lowercase) or `CÔNG NGHỆ` (all uppercase) into the category filter input box.
+2. Observe the resulting list of books displayed.
 
-**Kết quả mong đợi:**
-`<!-- Kết quả đúng theo SRS -->`
+**Expected Result:**
+The filter system should be case-insensitive, just like the search box, returning books under the "Công nghệ" (Technology) category.
 
-**Kết quả thực tế:**
-`<!-- Kết quả hệ thống thật sự trả về -->`
+**Actual Result:**
+The book list is empty, displaying the message "Không tìm thấy sách" (Book not found). The filter box is currently case-sensitive.
 
-**Tác động:**
-`<!-- VD: Vi phạm quy tắc nghiệp vụ cốt lõi, cho phép mượn vượt giới hạn -->`
+**Impact:**
+Causes confusion for users when typing lower/uppercase, resulting in an inconsistent experience with the search box (which is case-insensitive).
 
-**Minh chứng:**
-`<!-- Đính kèm ảnh chụp màn hình nếu có -->`
+**Evidence:**
+—
 
-**Đề xuất xử lý:**
-`<!-- Gợi ý cách sửa lỗi nếu có -->` 
+**Proposed Solution:**
+Add a lowercase normalization function (e.g., `toLowerCase()`) for both the filter keyword and the book category data before comparing.
 
 ---
 
 ## BUG-02
 
+| Attribute | Details |
+|-----------|---------|
+| **Bug ID** | BUG-02 |
+| **Related TC** | TC-22 |
+| **Related REQ** | REQ-03 |
+| **Severity** | Medium |
+| **Reporter** | Ha Dang Huy |
+| **Date Found** | 22/05/2026 |
+| **Status** | Open |
+
+**Title:**
+Combined search and filter behave inconsistently when the search box has no results
+
+**Environment:**
+- Browser: Chrome 136.0.7103.93
+- OS: Windows 11
+- UI Language: Vietnamese
+
+**Prerequisites:**
+Successfully logged in. Currently on "Books" tab.
+
+**Steps to Reproduce:**
+1. Enter `Kinh tế` into the category filter box (there are books in the Economy category).
+2. Enter `Flutter` into the search box.
+3. Observe the list of books.
+
+**Expected Result:**
+The system consistently applies the "AND" logic (as seen in TC-25). Since there are no books named "Flutter" in the "Kinh tế" category, the system should return an empty list and display "Không tìm thấy sách" (Book not found).
+
+**Actual Result:**
+The system seems to ignore the search condition and continues to display all books in the "Kinh tế" category (BOOK007, BOOK014, BOOK015).
+
+**Impact:**
+Combined search logic is flawed, returning incorrect results when one of the two conditions does not match, which misleads user expectations.
+
+**Evidence:**
+—
+
+**Proposed Solution:**
+Update the book list retrieval logic: Both filters must be applied simultaneously (AND). If either condition is not met, the final result list must be empty.
+
+---
+
+## BUG-03
+
 | Thuộc tính | Chi tiết |
 |-----------|---------|
-| **Mã lỗi** | BUG-02 |
-| **TC liên quan** | `<!-- TC-xx -->` |
-| **REQ liên quan** | `<!-- REQ-xx -->` |
-| **Mức độ** | `<!-- High / Medium / Low -->` |
-| **Người phát hiện** | `<!-- Họ tên thành viên -->` |
-| **Ngày phát hiện** | `<!-- DD/MM/YYYY -->` |
-| **Trạng thái** | `<!-- Open / Closed -->` |
+| **Mã lỗi** | BUG-03 |
+| **TC liên quan** | TC-24 |
+| **REQ liên quan** | REQ-04 |
+| **Mức độ** | **High** — Violates core business rules by allowing members to borrow books beyond the maximum limit, leading to system inventory discrepancies|
+| **Người phát hiện** | Pham Dinh Anh Duong |
+| **Ngày phát hiện** | 23/05/2026 |
+| **Trạng thái** | Open |
 
 **Tiêu đề:**
-`<!-- Mô tả hành vi lỗi -->`
+System allows member to borrow 4 books concurrently (Off-by-one boundary error on the limit of 3 books)
+
+**Môi trường:**
+- Trình duyệt: Chrome Version 148.0.7778.179
+- Hệ điều hành: Windows
+- Ngôn ngữ giao diện: Tiếng Việt
+
+**Điều kiện tiên quyết:**
+- Member account `"ba.nguyen@email.com"` is logged in.
+- The account currently has exactly 1 active borrowed book record in the system (according to Seed Data).
 
 **Bước tái hiện:**
-1. `<!-- -->`
-2. `<!-- -->`
-3. `<!-- -->`
+1. Navigate to the "Books" tab.
+2. Click the `(+)` button to borrow book `BOOK002` (Total active borrows = 2).
+3. Click the `(+)` button to borrow book `BOOK004` (Total active borrows = 3).
+4. Attempt to borrow a 4th book (`BOOK005`) by clicking its `(+)` button.
 
 **Kết quả mong đợi:**
-`<!-- -->`
+At step 4, the system must block the action and display a clear error message stating: "Đã đạt giới hạn 3 cuốn sách" (Maximum limit of 3 books reached) to prevent the 4th book from being borrowed.
 
 **Kết quả thực tế:**
-`<!-- -->`
+At step 4, the system allows the borrow action for `BOOK005` to process successfully. The member's total active borrowed books increases to 4 without any warning or restriction.
 
 **Tác động:**
-`<!-- -->`
+Allows users to bypass the business rule constraint. If deployed to production, it will break the library inventory workflow, disrupt book availability tracking, and negatively impact other members' borrowing privileges.
 
 **Minh chứng:**
-`<!-- -->`
+![Bug 01 Evidence](images/req04_bug03.png)
+
+**Đề xuất xử lý:**
+Verify the comparison operator inside the active borrows validation logic. Ensure the system restricts the borrow action if `active_borrows >= 3` instead of an incorrect condition like `< 4` or `<= 3`.
+
+---
+
+## BUG-04
+
+| Thuộc tính | Chi tiết |
+|-----------|---------|
+| **Mã lỗi** | BUG-04 |
+| **TC liên quan** | TC-25 |
+| **REQ liên quan** | REQ-04 |
+| **Mức độ** | **High** — System misidentifies user core account state and displays an incorrect, misleading error message during the core workflow |
+| **Người phát hiện** | Pham Dinh Anh Duong |
+| **Ngày phát hiện** | 23/05/2026 |
+| **Trạng thái** | Open |
+
+**Tiêu đề:**
+"Suspended" member account displays incorrect error message stating "Thành viên đã hết hạn" upon borrowing
+
+**Môi trường:**
+- Trình duyệt: Chrome 148.0.7778.179
+- Hệ điều hành: Windows
+- Ngôn ngữ giao diện: Tiếng Việt
+
+**Điều kiện tiên quyết:**
+- Member account `"cu.le@email.com"` is logged in (Account status is Suspended in Seed Data).
+
+**Bước tái hiện:**
+1. Navigate to the "Books" tab.
+2. Find any book that is currently marked as "Có sẵn" (Available).
+3. Click the `(+)` button to attempt to borrow the book.
+
+**Kết quả mong đợi:**
+The system blocks the action and displays a specific error message reflecting that the account is currently "Suspended / Temporarily Disabled".
+
+**Kết quả thực tế:**
+The system blocks the action but displays an incorrect, unrelated red error banner at the bottom stating: "Thành viên đã hết hạn. Không thể mượn sách." (Member has expired. Cannot borrow book).
+
+**Tác động:**
+The system mismaps and misidentifies the user state workflow. It misleads suspended members about the actual reason their features are locked, making it difficult for administrators or librarians to handle user complaints and inquiries accurately.
+
+**Minh chứng:**
+![Bug 02 Evidence](images/req04_bug04.png)
+
+**Đề xuất xử lý:**
+Check the error handling logic or the conditional flow (`switch/case` or `if/else`) that validates member status during the borrow process. Ensure that the error code returned for a `Suspended` account maps to its correct UI string instead of falling back to the `Expired` account message string.
+---
+
+
+## BUG-05
+
+| Thuộc tính          | Chi tiết      |
+| ------------------- | ------------- |
+| **Mã lỗi**          | BUG-t5        |
+| **TC liên quan**    | `TC-36`       |
+| **REQ liên quan**   | `REQ-06 `     |
+| **Mức độ**          | `Medium `     |
+| **Người phát hiện** | `Ha Dang Huy` |
+| **Ngày phát hiện**  | `23/5/2026`   |
+| **Trạng thái**      | ` Open`       |
+
+**Tiêu đề:**
+`Due date = today will not be marked as overdue`
+
+**Môi trường:**
+
+- Trình duyệt: Chrome ` 136.0.7103.93`
+- Hệ điều hành: `Windows 11`
+- Ngôn ngữ giao diện: Tiếng Việt / English
+
+**Điều kiện tiên quyết:**
+`The BR006 record exists, with status "Borrowing"`
+
+**Bước tái hiện:**
+
+1. `1. Log in using your Librarian account. `
+2. `2. Click the "Check Expired" button.`
+
+**Kết quả mong đợi:**
+`The BR006 record will be marked as	Overdue`
+
+**Kết quả thực tế:**
+`The BR006 record will be marked as Overdue or Returned depending on the time.`
+
+**Tác động:**
+`Displays the incorrect status for the borrowing record, violating core business rules (failing to properly update the status to "Overdue" on the due date itself). This can prevent librarians from handling overdue books in a timely manner and may result in incorrect fine calculations if applicable`
+
+**Minh chứng:**
+![Bug 01 Evidence](images/req06_bug05_1.png)
+![Bug 01 Evidence](images/req06_bug05_2.png)
+
+**Đề xuất xử lý:**
+`<!-- Gợi ý cách sửa lỗi nếu có -->`
+
+---
+
+## BUG-06
+
+| Thuộc tính          | Chi tiết      |
+| ------------------- | ------------- |
+| **Mã lỗi**          | BUG-06        |
+| **TC liên quan**    | `TC-40`       |
+| **REQ liên quan**   | `REQ-07`      |
+| **Mức độ**          | `High `       |
+| **Người phát hiện** | `Ha Dang Huy` |
+| **Ngày phát hiện**  | `23/5/2026`   |
+| **Trạng thái**      | `Open`        |
+
+**Tiêu đề:**
+`Email validation is too loose — it accepts 'test@email`
+
+**Bước tái hiện:**
+
+1. `Log in using Librarian account.  `
+2. `Click the "Add member" button.`
+3. `Enter the information with email: 'test@email` .`
+4. `Click the "Add member" button.`
+
+**Kết quả mong đợi:**
+`An error message should appear indicating "Invalid email", and the registration should be blocked`
+
+**Kết quả thực tế:**
+`The system accepts the input and displays a "Successfully" notification`
+
+**Tác động:**
+`Saves malformed emails into the database, breaking data integrity. This prevents the system from sending crucial notifications (e.g., registration or overdue reminders) and may cause downstream email delivery errors`
+
+**Minh chứng:**
+![Bug 01 Evidence](images/req07_bug06.png)
 
 **Đề xuất xử lý:**
 `<!-- -->`
@@ -96,3 +275,42 @@ Hello world
 ---
 
 <!-- Copy template BUG trên để thêm BUG-03, BUG-04, ... cho mỗi TC Fail -->
+
+## BUG-07
+
+| Thuộc tính          | Chi tiết      |
+| ------------------- | ------------- |
+| **Mã lỗi**          | BUG-07        |
+| **TC liên quan**    | `TC-42`       |
+| **REQ liên quan**   | `REQ-07`      |
+| **Mức độ**          | `Medium `     |
+| **Người phát hiện** | `Ha Dang Huy` |
+| **Ngày phát hiện**  | `23/5/2026`   |
+| **Trạng thái**      | `Open`        |
+
+**Tiêu đề:**
+`Valid email syntax is not accepted`
+
+**Bước tái hiện:**
+
+1. `Log in using Librarian account.  `
+2. `Click the "Add member" button.`
+3. `Enter the information with email: 'test@email.com` .`
+4. `Click the "Add member" button.`
+
+**Kết quả mong đợi:**
+`The system accepts the input, successfully registers the member, and displays a success notification. `
+
+**Kết quả thực tế:**
+`The system rejects the input and incorrectly displays an "Invalid email" error message.`
+
+**Tác động:**
+`Prevents valid users from registering or updating their profiles with legitimate email addresses. This completely blocks the account creation workflow for valid members and disrupts library operations.`
+
+**Minh chứng:**
+![Bug 01 Evidence](images/req07_bug07.png)
+
+**Đề xuất xử lý:**
+`<!-- -->`
+
+---
