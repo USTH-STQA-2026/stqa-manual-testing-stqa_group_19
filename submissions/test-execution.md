@@ -24,24 +24,25 @@
 | TC-06  | REQ-06         | Librarian sees both BR005 and BR001 as Overdue.                                                       | Librarian sees both BR005 and BR001 as Overdue.                                         | Pass     |            |
 | TC-08  | REQ-07         | Member added successfully.                                                                            | The system rejects the input and incorrectly displays an "Invalid email" error message. | Fail     |            |
 | TC-09  | REQ-07         | The system display an "Invalid email" error message                                                   | The system display an "Invalid email" error message                                     | Pass     |            |
-| TC-010 | REQ-07         | The system accepts the input, successfully registers the member, and displays a success notification. | The system display an "Invalid email" error message                                     | Pass     |            |
+| TC-010 | REQ-07         | The system accepts the input, successfully registers the member, and displays a success notification. | The system display an "Invalid email" error message                                     | Fail     |            |
 | TC-011 | REQ-07         | The system display an "Invalid email" error message                                                   | The system display an "Invalid email" error message                                     | Pass     |
 
 ---
 
 ## Tổng hợp kết quả
 
-| Chỉ số            | Giá trị        |
-| ----------------- | -------------- |
-| Tổng số test case | `<!-- số -->`  |
-| Pass              | `<!-- số -->`  |
-| Fail              | `<!-- số -->`  |
-| Blocked           | `<!-- số -->`  |
-| Not Run           | `<!-- số -->`  |
-| **Tỷ lệ Pass**    | `<!-- xx% -->` |
+| Chỉ số            | Giá trị       |
+| ----------------- | ------------- |
+| Tổng số test case | `10`          |
+| Pass              | `7`           |
+| Fail              | `3`           |
+| Blocked           | `<!-- số -->` |
+| Not Run           | `<!-- số -->` |
+| **Tỷ lệ Pass**    | `70%`         |
 
 ### Kết quả theo nhóm chức năng
 
-| Nhóm | Tổng TC | Pass | Fail | Tỷ lệ Pass |
-| ---- | ------- | ---- | ---- | ---------- |
-|      |         |      |      |            |
+| Nhóm                         | Tổng TC | Pass | Fail | Tỷ lệ Pass |
+| ---------------------------- | ------- | ---- | ---- | ---------- |
+| RateREQ-06: Overdue Handling | 6       | 5    | 1    | 5/6        |
+| REQ-07: Member Management    | 4       | 2    | 2    | 1/2        |
