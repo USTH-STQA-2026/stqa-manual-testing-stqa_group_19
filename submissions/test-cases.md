@@ -56,16 +56,13 @@
 
 ### IDM — Overdue Handling (REQ-06)
 
-| Đặc tính (Characteristic) | Phân vùng (Block)      | Giá trị đại diện (Value) | Kết quả mong đợi                 |
-| ------------------------- | ---------------------- | ------------------------ | -------------------------------- |
-| dueDate                   | dueDate < current date | BR001                    | Overdue                          |
-|                           | dueDate = current date |                          | Overdue                          |
-|                           | dueDate > current date | BR002                    | prompt                           |
-| Trạng thái thành viên?    | Hoạt động              | MEM002                   | Cho phép mượn                    |
-|                           | Tạm ngưng              | MEM004                   | Từ chối, thông báo lỗi           |
-|                           | Hết hạn                | MEM005                   | Từ chối, thông báo lỗi           |
-| Số sách đang mượn?        | < 3 (BVA: 0, 1, 2)     | MEM006 (0 sách)          | Cho phép mượn                    |
-|                           | = 3 (BVA: giới hạn)    | MEM đã mượn 3 sách       | Từ chối, thông báo vượt giới hạn |
+| Đặc tính (Characteristic) | Phân vùng (Block)       | Giá trị đại diện (Value) | Kết quả mong đợi                                                                   |
+| ------------------------- | ----------------------- | ------------------------ | ---------------------------------------------------------------------------------- |
+| dueDate                   | dueDate < current date  | BR001                    | Overdue                                                                            |
+|                           | dueDate == current date |                          | Overdue                                                                            |
+|                           | dueDate > current date  | BR002                    | prompt                                                                             |
+| login account             | Librarian               | LIB001                   | Librarian can view all the overdue record                                          |
+|                           | Member                  | MEM003                   | MEM003 can just see their own overdue record and cannot see others overdue records |
 
 ### IDM — Member Management (REQ-07)
 
@@ -74,8 +71,9 @@
 | Full name                 | empty                               | `""`                     | The full name cannot be left blank. |
 |                           | not empty                           | (any value)              | allowed                             |
 | Email                     | empty                               | `""`                     | The email cannot be left blank.     |
-|                           | no @                                | `nooneemail.com`         | invalid email                       |
+|                           | Missing @                           | `nooneemail.com`         | invalid email                       |
 |                           | no .                                | `noone@emailcom`         | invalid email                       |
+|                           | duplicate email                     | `ba.nguyen@email.com`    | invalid email                       |
 |                           | no domain                           | `noone@emailcom`         | invalid email                       |
 |                           | have @ and . and domain             | `noone@email.com`        | allowed                             |
 |                           | email already exists                | `dam.tran@email.com`     | invalid                             |
