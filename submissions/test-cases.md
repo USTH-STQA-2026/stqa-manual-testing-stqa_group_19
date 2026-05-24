@@ -60,25 +60,25 @@
 |---|---|---|---|
 | Does the book belong to this member's borrow record? | Yes  | BR001 — MEM002 borrowed BOOK003 | Return is allowed |
 | | No  | BR003 — BOOK013 belongs to MEM006, accessed by MEM002 | Return button not shown / rejected |
-| When is the book returned relative to due date? | On time (≤ dueDate) | Borrowed today, returned same day (dueDate = today + 14) | Return succeeds, **no** overdue warning |
-| | Overdue (> dueDate) | BR001 — dueDate 15/09/2024, returned in 2026 | Return succeeds, **overdue warning** displayed |
+| When is the book returned relative to due date? | On time (≤ dueDate) | Borrowed today, returned same day (dueDate = today + 14) | Return succeeds, no overdue warning |
+| | Overdue (> dueDate) | BR001 — dueDate 15/09/2024, returned in 2026 | Return succeeds, overdue warning displayed |
 | Book status after return? | Changes to "Available" | BOOK003 after BR001 is returned | BOOK003 = "Available" |
 | | Unchanged if not yet returned | BOOK003 while BR001 still active | BOOK003 = "Borrowed" |
 | Is status updated in real-time? | Yes (immediately) | Go to Books tab right after returning | Status updates without page refresh |
-| | No (delayed) | — | **Bug** — does not meet REQ-02 |
+| | No (delayed) | — | Bug — does not meet REQ-02 |
 
 ### IDM — REQ-08
 | Đặc tính (Characteristic) | Phân vùng (Block) | Giá trị đại diện (Value) | Kết quả mong đợi |
 |---|---|---|---|
-| User role? | Librarian | `librarian@library.com` | Can view **all** borrow records of every member |
-| | Member | `ba.nguyen@email.com` (MEM002) | Can only view **own** records |
+| User role? | Librarian | `librarian@library.com` | Can view all borrow records of every member |
+| | Member | `ba.nguyen@email.com` (MEM002) | Can only view own records |
 | Whose record is being viewed? | Belongs to the logged-in member | BR001, BR004 — owned by MEM002 | Displayed normally |
-| | Belongs to another member | BR003 — owned by MEM006, accessed by MEM002 | **Not displayed** / access denied |
+| | Belongs to another member | BR003 — owned by MEM006, accessed by MEM002 | Not displayed / access denied |
 | Does the member have any borrow records? | Has records | MEM002 has BR001, BR004 | Record list is displayed |
 | | No records | New member who has never borrowed | Empty list displayed |
-| Record status displayed? | Active | BR001 — not yet returned, not yet overdue | Displays **"Borrowed"** |
-| | Returned | BR002 — returned on 20/08/2024 | Displays **"Returned"** |
-| | Overdue | BR001 — after librarian runs overdue check | Displays **"Quá hạn"** |
+| Record status displayed? | Active | BR001 — not yet returned, not yet overdue | Displays "Borrowed" |
+| | Returned | BR002 — returned on 20/08/2024 | Displays "Returned" |
+| | Overdue | BR001 — after librarian runs overdue check | Displays "Overdue" |
 
 | `<!-- Nhóm tự điền -->` | | | |
 
