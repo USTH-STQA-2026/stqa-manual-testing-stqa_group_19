@@ -6,8 +6,8 @@
 
 | Thông tin | |
 |---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày tạo** | `<!-- DD/MM/YYYY -->` |
+| **Nhóm** | group 19 |
+| **Ngày tạo** | 24/05/2026 |
 | **Hệ thống** | https://stqa.rbc.vn |
 | **Tham chiếu** | SRS v1.0 |
 

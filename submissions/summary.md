@@ -8,9 +8,9 @@
 
 | Mục | Thông tin |
 |-----|----------|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Lớp** | `<!-- VD: SE001.P11 -->` |
-| **Ngày báo cáo** | `<!-- DD/MM/YYYY -->` |
+| **Nhóm** | Group 19 |
+| **Lớp** | Class 2 |
+| **Ngày báo cáo** | 24/05/2026 |
 | **Hệ thống kiểm thử** | https://stqa.rbc.vn — v1.0 |
 
 ---

@@ -5,10 +5,10 @@
 
 | Thông tin | |
 |---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày thực thi** | `<!-- DD/MM/YYYY -->` |
-| **Trình duyệt** | Chrome `<!-- version -->` |
-| **Hệ điều hành** | `<!-- Windows / macOS / Linux -->` |
+| **Nhóm** | Group 19 |
+| **Ngày thực thi** | 24/05/2026 |
+| **Trình duyệt** | Chrome 148.0.7778.179 (Official Build) (64-bit) |
+| **Hệ điều hành** | Windows |
 
 ---
 

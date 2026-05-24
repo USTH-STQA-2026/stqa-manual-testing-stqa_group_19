@@ -8,8 +8,8 @@ Hello world
 
 | Thông tin | |
 |---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày báo cáo** | `<!-- DD/MM/YYYY -->` |
+| **Nhóm** | Group 19 |
+| **Ngày báo cáo** | 24/05/2016 |
 
 ---
 
