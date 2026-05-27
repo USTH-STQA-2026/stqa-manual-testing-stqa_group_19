@@ -155,9 +155,9 @@
 > **Expected result source:** SRS REQ-03 — "Search by book title or author; Filter by category; case-insensitive; no result -> 'Book not found'".
 >
 > **Note on SRS gap:** SRS does not specify case-sensitivity for filter box, and does not specify behavior when using search + filter simultaneously. Related TCs (TC-18 → TC-22) record actual result to report gap, **do not** conclude Pass/Fail based on self-determined expected result.
-> ### ⚠️ TC-21 → TC-22 — Record SRS Gap (do not conclude Pass/Fail)
+> ### ⚠️ TC-311 — Record SRS Gap (do not conclude Pass/Fail)
 >
-> SRS REQ-03 **does not specify** c
+> SRS REQ-03 **does not specify**
 | TC ID | Test Objective                                          | Prerequisites          ase-sensitivity for the category filter box and **does not specify** behavior when combining search + filter.
 > The TCs below are executed to **observe and record actual reality**, not imposing expected result.
 > Actual results will be reported in `summary.md` as an **SRS gap needing clarification**.
