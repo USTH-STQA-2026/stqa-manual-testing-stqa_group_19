@@ -51,7 +51,7 @@
 
 **Minh chứng:**
 ![Bug 01 Evidence](bug01.png)
-![Bug 01 Evidence](bug01.1.png.png)
+![Bug 01 Evidence](bug01.1.png)
 
 **Đề xuất xử lý:**
 `<!-- Gợi ý cách sửa lỗi nếu có -->`
