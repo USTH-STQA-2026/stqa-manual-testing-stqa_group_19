@@ -7,7 +7,10 @@
 
 ---
 
-## BUG-01
+Bug title để ngay bên cạnh bug
+environment thì để hết lên đầu, ko cần cách biệt giữa các bug
+
+## BUG-01: Category filter is case-sensitive, causing "Book not found" error
 
 | Attribute | Details |
 |-----------|---------|
@@ -15,12 +18,9 @@
 | **Related TC** | TC-19, TC-20 |
 | **Related REQ** | REQ-03 |
 | **Severity** | Low |
-| **Reporter** | Nguyen Tung Duong |
+| **Reporter** | Nguyen Minh Duc |
 | **Date Found** | 22/05/2026 |
 | **Status** | Open |
-
-**Title:**
-Category filter is case-sensitive, causing "Book not found" error
 
 **Environment:**
 - Browser: Chrome 136.0.7103.93
@@ -44,6 +44,7 @@ The book list is empty, displaying the message "Không tìm thấy sách" (Book 
 Causes confusion for users when typing lower/uppercase, resulting in an inconsistent experience with the search box (which is case-insensitive).
 
 **Evidence:**
+<img src="images/TC_019.png"> <img src="images/TC_020.png">
 —
 
 **Proposed Solution:**
@@ -51,20 +52,18 @@ Add a lowercase normalization function (e.g., `toLowerCase()`) for both the filt
 
 ---
 
-## BUG-02
+## BUG-02: Combined search and filter behave inconsistently when the search box has no results
 
 | Attribute | Details |
 |-----------|---------|
 | **Bug ID** | BUG-02 |
-| **Related TC** | TC-22 |
+| **Related TC** | TC-21 |
 | **Related REQ** | REQ-03 |
 | **Severity** | Medium |
-| **Reporter** | Ha Dang Huy |
+| **Reporter** | Nguyen Minh Duc |
 | **Date Found** | 22/05/2026 |
 | **Status** | Open |
 
-**Title:**
-Combined search and filter behave inconsistently when the search box has no results
 
 **Environment:**
 - Browser: Chrome 136.0.7103.93
@@ -89,27 +88,24 @@ The system seems to ignore the search condition and continues to display all boo
 Combined search logic is flawed, returning incorrect results when one of the two conditions does not match, which misleads user expectations.
 
 **Evidence:**
-—
+<img src="images/TC_021.png">
 
 **Proposed Solution:**
 Update the book list retrieval logic: Both filters must be applied simultaneously (AND). If either condition is not met, the final result list must be empty.
 
 ---
 
-## BUG-03
+## BUG-03: System allows member to borrow 4 books concurrently (Off-by-one boundary error on the limit of 3 books)
 
 | Thuộc tính | Chi tiết |
 |-----------|---------|
 | **Mã lỗi** | BUG-03 |
-| **TC liên quan** | TC-24 |
+| **TC liên quan** | TC-23 |
 | **REQ liên quan** | REQ-04 |
 | **Mức độ** | **High** — Violates core business rules by allowing members to borrow books beyond the maximum limit, leading to system inventory discrepancies|
 | **Người phát hiện** | Pham Dinh Anh Duong |
 | **Ngày phát hiện** | 23/05/2026 |
 | **Trạng thái** | Open |
-
-**Tiêu đề:**
-System allows member to borrow 4 books concurrently (Off-by-one boundary error on the limit of 3 books)
 
 **Môi trường:**
 - Trình duyệt: Chrome Version 148.0.7778.179
@@ -136,27 +132,24 @@ At step 4, the system allows the borrow action for `BOOK005` to process successf
 Allows users to bypass the business rule constraint. If deployed to production, it will break the library inventory workflow, disrupt book availability tracking, and negatively impact other members' borrowing privileges.
 
 **Minh chứng:**
-![Bug 01 Evidence](images/req04_bug03.png)
+<img src="images/TC_023.png">
 
 **Đề xuất xử lý:**
 Verify the comparison operator inside the active borrows validation logic. Ensure the system restricts the borrow action if `active_borrows >= 3` instead of an incorrect condition like `< 4` or `<= 3`.
 
 ---
 
-## BUG-04
+## BUG-04: "Suspended" member account displays incorrect error message stating "Thành viên đã hết hạn" upon borrowing
 
 | Thuộc tính | Chi tiết |
 |-----------|---------|
 | **Mã lỗi** | BUG-04 |
-| **TC liên quan** | TC-25 |
+| **TC liên quan** | TC-24 |
 | **REQ liên quan** | REQ-04 |
 | **Mức độ** | **High** — System misidentifies user core account state and displays an incorrect, misleading error message during the core workflow |
 | **Người phát hiện** | Pham Dinh Anh Duong |
 | **Ngày phát hiện** | 23/05/2026 |
 | **Trạng thái** | Open |
-
-**Tiêu đề:**
-"Suspended" member account displays incorrect error message stating "Thành viên đã hết hạn" upon borrowing
 
 **Môi trường:**
 - Trình duyệt: Chrome 148.0.7778.179
@@ -181,155 +174,24 @@ The system blocks the action but displays an incorrect, unrelated red error bann
 The system mismaps and misidentifies the user state workflow. It misleads suspended members about the actual reason their features are locked, making it difficult for administrators or librarians to handle user complaints and inquiries accurately.
 
 **Minh chứng:**
-![Bug 02 Evidence](images/req04_bug04.png)
+<img src="images/TC_024.png">
 
 **Đề xuất xử lý:**
 Check the error handling logic or the conditional flow (`switch/case` or `if/else`) that validates member status during the borrow process. Ensure that the error code returned for a `Suspended` account maps to its correct UI string instead of falling back to the `Expired` account message string.
 ---
 
 
-## BUG-05
-
-| Thuộc tính          | Chi tiết      |
-| ------------------- | ------------- |
-| **Mã lỗi**          | BUG-t5        |
-| **TC liên quan**    | `TC-36`       |
-| **REQ liên quan**   | `REQ-06 `     |
-| **Mức độ**          | `Medium `     |
-| **Người phát hiện** | `Ha Dang Huy` |
-| **Ngày phát hiện**  | `23/5/2026`   |
-| **Trạng thái**      | ` Open`       |
-
-**Tiêu đề:**
-`Due date = today will not be marked as overdue`
-
-**Môi trường:**
-
-- Trình duyệt: Chrome ` 136.0.7103.93`
-- Hệ điều hành: `Windows 11`
-- Ngôn ngữ giao diện: Tiếng Việt / English
-
-**Điều kiện tiên quyết:**
-`The BR006 record exists, with status "Borrowing"`
-
-**Bước tái hiện:**
-
-1. `1. Log in using your Librarian account. `
-2. `2. Click the "Check Expired" button.`
-
-**Kết quả mong đợi:**
-`The BR006 record will be marked as	Overdue`
-
-**Kết quả thực tế:**
-`The BR006 record will be marked as Overdue or Returned depending on the time.`
-
-**Tác động:**
-`Displays the incorrect status for the borrowing record, violating core business rules (failing to properly update the status to "Overdue" on the due date itself). This can prevent librarians from handling overdue books in a timely manner and may result in incorrect fine calculations if applicable`
-
-**Minh chứng:**
-![Bug 01 Evidence](images/req06_bug05_1.png)
-![Bug 01 Evidence](images/req06_bug05_2.png)
-
-**Đề xuất xử lý:**
-`<!-- Gợi ý cách sửa lỗi nếu có -->`
-
----
-
-## BUG-06
-
-| Thuộc tính          | Chi tiết      |
-| ------------------- | ------------- |
-| **Mã lỗi**          | BUG-06        |
-| **TC liên quan**    | `TC-40`       |
-| **REQ liên quan**   | `REQ-07`      |
-| **Mức độ**          | `High `       |
-| **Người phát hiện** | `Ha Dang Huy` |
-| **Ngày phát hiện**  | `23/5/2026`   |
-| **Trạng thái**      | `Open`        |
-
-**Tiêu đề:**
-`Email validation is too loose — it accepts 'test@email`
-
-**Bước tái hiện:**
-
-1. `Log in using Librarian account.  `
-2. `Click the "Add member" button.`
-3. `Enter the information with email: 'test@email` .`
-4. `Click the "Add member" button.`
-
-**Kết quả mong đợi:**
-`An error message should appear indicating "Invalid email", and the registration should be blocked`
-
-**Kết quả thực tế:**
-`The system accepts the input and displays a "Successfully" notification`
-
-**Tác động:**
-`Saves malformed emails into the database, breaking data integrity. This prevents the system from sending crucial notifications (e.g., registration or overdue reminders) and may cause downstream email delivery errors`
-
-**Minh chứng:**
-![Bug 01 Evidence](images/req07_bug06.png)
-
-**Đề xuất xử lý:**
-`<!-- -->`
-
----
-
-<!-- Copy template BUG trên để thêm BUG-03, BUG-04, ... cho mỗi TC Fail -->
-
-## BUG-07
-
-| Thuộc tính          | Chi tiết      |
-| ------------------- | ------------- |
-| **Mã lỗi**          | BUG-07        |
-| **TC liên quan**    | `TC-42`       |
-| **REQ liên quan**   | `REQ-07`      |
-| **Mức độ**          | `Medium `     |
-| **Người phát hiện** | `Ha Dang Huy` |
-| **Ngày phát hiện**  | `23/5/2026`   |
-| **Trạng thái**      | `Open`        |
-
-**Tiêu đề:**
-`Valid email syntax is not accepted`
-
-**Bước tái hiện:**
-
-1. `Log in using Librarian account.  `
-2. `Click the "Add member" button.`
-3. `Enter the information with email: 'test@email.com` .`
-4. `Click the "Add member" button.`
-
-**Kết quả mong đợi:**
-`The system accepts the input, successfully registers the member, and displays a success notification. `
-
-**Kết quả thực tế:**
-`The system rejects the input and incorrectly displays an "Invalid email" error message.`
-
-**Tác động:**
-`Prevents valid users from registering or updating their profiles with legitimate email addresses. This completely blocks the account creation workflow for valid members and disrupts library operations.`
-
-**Minh chứng:**
-![Bug 01 Evidence](images/req07_bug07.png)
-
-**Đề xuất xử lý:**
-`<!-- -->`
-
----
-
-## BUG-08
+## BUG-05: `System does not display overdue warning when a member returns an overdue book`
 
 | Thuộc tính | Chi tiết |
 |-----------|---------|
-| **Mã lỗi** | BUG-08 |
-| **TC liên quan** | TC-31 |
+| **Mã lỗi** | BUG-05  |
+| **TC liên quan** | TC-30 |
 | **REQ liên quan** | REQ-05 |
 | **Mức độ** | High |
 | **Người phát hiện** | Tạ Quang Huy |
 | **Ngày phát hiện** | 24/05/2026|
 | **Trạng thái** | Open |
-
-**Tiêu đề:**
-System does not display overdue warning when a member returns an overdue book
-
 
 **Môi trường:**
 - Trình duyệt: Chrome 148.0.7778.179
@@ -340,8 +202,6 @@ System does not display overdue warning when a member returns an overdue book
 Logged in as ba.nguyen@email.com (MEM002)
 Fresh seed data (page refreshed or "Khôi phục dữ liệu" clicked)
 Borrow record BR001 exists: MEM002 borrowed BOOK003, due date 15/09/2024 (overdue as of 2026)
-
-
 
 **Bước tái hiện:**
 1. Log in as `ba.nguyen@email.com`
@@ -370,27 +230,102 @@ According to REQ-05:
 - Members are not informed of overdue behavior, undermining accountability`
 
 **Minh chứng:**
-`<!-- Đính kèm ảnh chụp màn hình nếu có -->`
 
+Before Return
+<img src="images/TC_030_1.png">
+After Return
+<img src="images/TC_030_2.png">
 **Đề xuất xử lý:**
 After the return action, compare the actual return date with `dueDate` on the borrow record. If `returnDate > dueDate`, display an overdue warning message before or after confirming the return
 
+
 ---
 
-## BUG-09
+## BUG-06: `Email validation is too loose — it accepts 'test@email`
+
+| Thuộc tính          | Chi tiết      |
+| ------------------- | ------------- |
+| **Mã lỗi**          | BUG-06        |
+| **TC liên quan**    | `TC-39`       |
+| **REQ liên quan**   | `REQ-07`      |
+| **Mức độ**          | `High `       |
+| **Người phát hiện** | `Ha Dang Huy` |
+| **Ngày phát hiện**  | `23/5/2026`   |
+| **Trạng thái**      | `Open`        |
+
+**Bước tái hiện:**
+
+1. `Log in using Librarian account.  `
+2. `Click the "Add member" button.`
+3. `Enter the information with email: 'test@email` .`
+4. `Click the "Add member" button.`
+
+**Kết quả mong đợi:**
+`An error message should appear indicating "Invalid email", and the registration should be blocked`
+
+**Kết quả thực tế:**
+`The system accepts the input and displays a "Successfully" notification`
+
+**Tác động:**
+`Saves malformed emails into the database, breaking data integrity. This prevents the system from sending crucial notifications (e.g., registration or overdue reminders) and may cause downstream email delivery errors`
+
+**Minh chứng:**
+![Bug 01 Evidence](images/TC_039.png  )
+
+**Đề xuất xử lý:**
+`<!-- -->`
+
+---
+
+<!-- Copy template BUG trên để thêm BUG-03, BUG-04, ... cho mỗi TC Fail -->
+
+## BUG-07: `Valid email syntax is not accepted`
+
+| Thuộc tính          | Chi tiết      |
+| ------------------- | ------------- |
+| **Mã lỗi**          | BUG-07        |
+| **TC liên quan**    | `TC-41`       |
+| **REQ liên quan**   | `REQ-07`      |
+| **Mức độ**          | `Medium `     |
+| **Người phát hiện** | `Ha Dang Huy` |
+| **Ngày phát hiện**  | `23/5/2026`   |
+| **Trạng thái**      | `Open`        |
+
+**Bước tái hiện:**
+
+1. `Log in using Librarian account.  `
+2. `Click the "Add member" button.`
+3. `Enter the information with email: 'test@email.com` .`
+4. `Click the "Add member" button.`
+
+**Kết quả mong đợi:**
+`The system accepts the input, successfully registers the member, and displays a success notification. `
+
+**Kết quả thực tế:**
+`The system rejects the input and incorrectly displays an "Invalid email" error message.`
+
+**Tác động:**
+`Prevents valid users from registering or updating their profiles with legitimate email addresses. This completely blocks the account creation workflow for valid members and disrupts library operations.`
+
+**Minh chứng:**
+![Bug 01 Evidence](images/req07_bug07.png)
+
+**Đề xuất xử lý:**
+`<!-- -->`
+
+---
+
+## BUG-08: Member can search and view borrow records of other members, and can return books on their behalf — unauthorized access and action
 
 | Thuộc tính | Chi tiết |
 |-----------|---------|
-| **Mã lỗi** | BUG-09 |
-| **TC liên quan** | TC-47 |
+| **Mã lỗi** | BUG-08 |
+| **TC liên quan** | TC-45 |
 | **REQ liên quan** | REQ-08 |
 | **Mức độ** | Critical |
 | **Người phát hiện** | Tạ Quang Huy |
 | **Ngày phát hiện** | 25/05/2026 |
 | **Trạng thái** | Open |
-
-**Tiêu đề:**
-Member can search and view borrow records of other members, and can return books on their behalf — unauthorized access and action
 
 **Môi trường:**
 - Trình duyệt: Chrome 148.0.7778.179
@@ -428,7 +363,7 @@ According to REQ-08:
 - In a real system, this would constitute a serious data breach and could be exploited maliciously
 
 **Minh chứng:**
-![BUG-02 Screenshot](images/req08_bug09.png)
+![BUG-02 Screenshot](images/TC_045.png)
 
 **Đề xuất xử lý:**
 - The "Search borrow records" feature must enforce role-based filtering on the server/data side:
@@ -436,5 +371,68 @@ According to REQ-08:
   - If role = "Librarian": full search access is permitted
 - The "Return book" button must also validate that `record.memberId == currentUserId` before allowing the action
 - Input in the search field should not be able to override the access control scope
+
+---
+
+## BUG-09: Member can return a book on behalf of another member — unauthorized write action
+
+| Thuộc tính | Chi tiết |
+|-----------|---------|
+| **Mã lỗi** | BUG-09 |
+| **TC liên quan** | TC-46 |
+| **REQ liên quan** | REQ-05, REQ-08 |
+| **Mức độ** | Critical |
+| **Người phát hiện** |Tạ Quang Huy |
+| **Ngày phát hiện** | 25/05/2026 |
+| **Trạng thái** | Open |
+
+**Môi trường:**
+- Trình duyệt: Chrome 148.0.7778.179
+- Hệ điều hành: Window 11
+- Ngôn ngữ giao diện: Tiếng Việt/ English
+
+**Điều kiện tiên quyết:**
+- Logged in as `ba.nguyen@email.com` (MEM002 — Nguyễn Học Bá, role: Thành viên)
+- Fresh seed data (page refreshed or "Khôi phục dữ liệu" clicked)
+- BR003 exists: borrowed by MEM006 (Hoàng Cá Biệt), BOOK013 "Quản trị nhân sự hiện đại", status "Đang mượn"
+- **Note:** This test case depends on BUG-02 being present — BR003 must be visible via search to proceed
+
+**Bước tái hiện:**
+1. Log in as `ba.nguyen@email.com` (MEM002)
+2. Go to tab "Borrow/Return" tab
+3. Click "Search borrow records" tab
+4. Type `MEM006` in the search field and click "Search"
+5. Locate BR003 ("Quản trị nhân sự hiện đại", owned by MEM006) in results
+6. Click "Return" button on BR003
+7. Observe whether the return action is accepted or rejected
+
+**Kết quả mong đợi:**
+- "Return" button is either not displayed or disabled for records not owned by MEM002
+- If button is somehow accessible and clicked, system rejects the action with an authorization error
+- BR003 status remains "Borrowing"
+- BOOK013 status remains "Borrowed"
+
+**Kết quả thực tế:**
+- After searching MEM006, BR003 was visible with an active **Trả sách** button
+- Clicking "Return" was accepted by the system 
+- BR003 status changed to "Returned"
+- BOOK013 status changed to "Available"
+- No authorization error or warning was shown
+
+**Tác động:**
+- **Critical data integrity violation**: any member can modify borrow records belonging to another member
+- A malicious member could return all books currently borrowed by other members, disrupting their borrow history
+- Violates both REQ-05 (return condition) and REQ-08 (member data isolation)
+
+**Minh chứng:**
+After Return
+![BUG-01 Screenshot](images/TC_046_1.png) 
+BOOK013 status
+![BUG-01 Screenshot](images/TC_046_2.png)
+
+**Đề xuất xử lý:**
+- The "Return" button must validate `record.memberId == currentUserId` before allowing the action, independent of how the record was retrieved
+- This validation must exist as a separate check from the search filter (BUG-02 fix) — even if search is fixed, the return action itself must also enforce ownership
+- Suggested check: before processing return, verify on the data layer that the borrow record belongs to the currently logged-in member
 
 ---
