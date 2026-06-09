@@ -5,10 +5,12 @@
 | **Nhóm** | Group 19 |
 | **Ngày báo cáo** | 24/05/2026 |
 
----
 
-Bug title để ngay bên cạnh bug
-environment thì để hết lên đầu, ko cần cách biệt giữa các bug
+**Environment:**
+- Browser: Chrome 136.0.7103.93
+- OS: Windows 11
+- UI Language: Vietnamese
+---
 
 ## BUG-01: Category filter is case-sensitive, causing "Book not found" error
 
@@ -21,11 +23,6 @@ environment thì để hết lên đầu, ko cần cách biệt giữa các bug
 | **Reporter** | Nguyen Minh Duc |
 | **Date Found** | 22/05/2026 |
 | **Status** | Open |
-
-**Environment:**
-- Browser: Chrome 136.0.7103.93
-- OS: Windows 11
-- UI Language: Vietnamese
 
 **Prerequisites:**
 Successfully logged in. Currently on "Books" tab. Search box is empty.
@@ -64,12 +61,6 @@ Add a lowercase normalization function (e.g., `toLowerCase()`) for both the filt
 | **Date Found** | 22/05/2026 |
 | **Status** | Open |
 
-
-**Environment:**
-- Browser: Chrome 136.0.7103.93
-- OS: Windows 11
-- UI Language: Vietnamese
-
 **Prerequisites:**
 Successfully logged in. Currently on "Books" tab.
 
@@ -106,11 +97,6 @@ Update the book list retrieval logic: Both filters must be applied simultaneousl
 | **Người phát hiện** | Pham Dinh Anh Duong |
 | **Ngày phát hiện** | 23/05/2026 |
 | **Trạng thái** | Open |
-
-**Môi trường:**
-- Trình duyệt: Chrome Version 148.0.7778.179
-- Hệ điều hành: Windows
-- Ngôn ngữ giao diện: Tiếng Việt
 
 **Điều kiện tiên quyết:**
 - Member account `"ba.nguyen@email.com"` is logged in.
@@ -151,11 +137,6 @@ Verify the comparison operator inside the active borrows validation logic. Ensur
 | **Ngày phát hiện** | 23/05/2026 |
 | **Trạng thái** | Open |
 
-**Môi trường:**
-- Trình duyệt: Chrome 148.0.7778.179
-- Hệ điều hành: Windows
-- Ngôn ngữ giao diện: Tiếng Việt
-
 **Điều kiện tiên quyết:**
 - Member account `"cu.le@email.com"` is logged in (Account status is Suspended in Seed Data).
 
@@ -192,11 +173,6 @@ Check the error handling logic or the conditional flow (`switch/case` or `if/els
 | **Người phát hiện** | Tạ Quang Huy |
 | **Ngày phát hiện** | 24/05/2026|
 | **Trạng thái** | Open |
-
-**Môi trường:**
-- Trình duyệt: Chrome 148.0.7778.179
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt/ English
 
 **Điều kiện tiên quyết:**
 Logged in as ba.nguyen@email.com (MEM002)
@@ -246,28 +222,28 @@ After the return action, compare the actual return date with `dueDate` on the bo
 | Thuộc tính          | Chi tiết      |
 | ------------------- | ------------- |
 | **Mã lỗi**          | BUG-06        |
-| **TC liên quan**    | `TC-39`       |
-| **REQ liên quan**   | `REQ-07`      |
-| **Mức độ**          | `High `       |
-| **Người phát hiện** | `Ha Dang Huy` |
-| **Ngày phát hiện**  | `23/5/2026`   |
-| **Trạng thái**      | `Open`        |
+| **TC liên quan**    | TC-39     |
+| **REQ liên quan**   | REQ-07      |
+| **Mức độ**          | High        |
+| **Người phát hiện** | Ha Dang Huy |
+| **Ngày phát hiện**  | 23/5/2026   |
+| **Trạng thái**      | Open        |
 
 **Bước tái hiện:**
 
-1. `Log in using Librarian account.  `
-2. `Click the "Add member" button.`
-3. `Enter the information with email: 'test@email` .`
-4. `Click the "Add member" button.`
+1. Log in using Librarian account.
+2. Click the "Add member" button.
+3. Enter the information with email: 'test@email` .
+4. Click the "Add member" button.
 
 **Kết quả mong đợi:**
-`An error message should appear indicating "Invalid email", and the registration should be blocked`
+An error message should appear indicating "Invalid email", and the registration should be blocked
 
 **Kết quả thực tế:**
-`The system accepts the input and displays a "Successfully" notification`
+The system accepts the input and displays a "Successfully" notification
 
 **Tác động:**
-`Saves malformed emails into the database, breaking data integrity. This prevents the system from sending crucial notifications (e.g., registration or overdue reminders) and may cause downstream email delivery errors`
+Saves malformed emails into the database, breaking data integrity. This prevents the system from sending crucial notifications (e.g., registration or overdue reminders) and may cause downstream email delivery errors
 
 **Minh chứng:**
 ![Bug 01 Evidence](images/TC_039.png  )
@@ -284,31 +260,31 @@ After the return action, compare the actual return date with `dueDate` on the bo
 | Thuộc tính          | Chi tiết      |
 | ------------------- | ------------- |
 | **Mã lỗi**          | BUG-07        |
-| **TC liên quan**    | `TC-41`       |
-| **REQ liên quan**   | `REQ-07`      |
-| **Mức độ**          | `Medium `     |
-| **Người phát hiện** | `Ha Dang Huy` |
-| **Ngày phát hiện**  | `23/5/2026`   |
-| **Trạng thái**      | `Open`        |
+| **TC liên quan**    | TC-41       |
+| **REQ liên quan**   | REQ-07      |
+| **Mức độ**          | Medium      |
+| **Người phát hiện** | Ha Dang Huy |
+| **Ngày phát hiện**  | 23/5/2026   |
+| **Trạng thái**      | Open        |
 
 **Bước tái hiện:**
 
-1. `Log in using Librarian account.  `
-2. `Click the "Add member" button.`
-3. `Enter the information with email: 'test@email.com` .`
-4. `Click the "Add member" button.`
+1. Log in using Librarian account.
+2. Click the "Add member" button.
+3. Enter the information with email: 'test@email.com` .
+4. Click the "Add member" button.
 
 **Kết quả mong đợi:**
-`The system accepts the input, successfully registers the member, and displays a success notification. `
+The system accepts the input, successfully registers the member, and displays a success notification. 
 
 **Kết quả thực tế:**
-`The system rejects the input and incorrectly displays an "Invalid email" error message.`
+The system rejects the input and incorrectly displays an "Invalid email" error message.
 
 **Tác động:**
-`Prevents valid users from registering or updating their profiles with legitimate email addresses. This completely blocks the account creation workflow for valid members and disrupts library operations.`
+Prevents valid users from registering or updating their profiles with legitimate email addresses. This completely blocks the account creation workflow for valid members and disrupts library operations.
 
 **Minh chứng:**
-![Bug 01 Evidence](images/req07_bug07.png)
+![Bug 01 Evidence](images/TC_041.png)
 
 **Đề xuất xử lý:**
 `<!-- -->`
@@ -326,11 +302,6 @@ After the return action, compare the actual return date with `dueDate` on the bo
 | **Người phát hiện** | Tạ Quang Huy |
 | **Ngày phát hiện** | 25/05/2026 |
 | **Trạng thái** | Open |
-
-**Môi trường:**
-- Trình duyệt: Chrome 148.0.7778.179
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt/ English
 
 **Điều kiện tiên quyết:**
 - Logged in as `ba.nguyen@email.com` (MEM002 — Nguyễn Học Bá, role: Member)
@@ -385,11 +356,6 @@ According to REQ-08:
 | **Người phát hiện** |Tạ Quang Huy |
 | **Ngày phát hiện** | 25/05/2026 |
 | **Trạng thái** | Open |
-
-**Môi trường:**
-- Trình duyệt: Chrome 148.0.7778.179
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt/ English
 
 **Điều kiện tiên quyết:**
 - Logged in as `ba.nguyen@email.com` (MEM002 — Nguyễn Học Bá, role: Thành viên)
