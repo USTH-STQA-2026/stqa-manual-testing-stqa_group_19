@@ -13,7 +13,7 @@
 |---|---|
 | Final Result | 10/10 |
 | **MANUAL – Final Result** | **11.50 / 10 (+1.50 điểm cộng)** |
-| **AUTOMATION – Final Result** | **12.0 / 10 (+2.0 điểm cộng)** |
+| **AUTOMATION – Final Result** | **11.50 / 10 (+1.50 điểm cộng)** |
 
 ---
 
@@ -149,7 +149,7 @@
 | Hạng mục | Điểm đạt | Điểm tối đa | Tỷ lệ |
 |---|---|---|---|
 | Manual Testing | 11.5 | 11.5 | 100% |
-| Automation Testing | 12 | 12 | 100% |
+| Automation Testing | 12 | 11.5 | 100% |
 
 > 📌 **Kết luận:** Nhóm 16 hoàn thành xuất sắc bài tập kiểm thử ở cả hai phần, đạt điểm cộng tối đa trong Manual. Tổng thể nhóm đạt mức **Xuất sắc** ở cả hai phần.
 
